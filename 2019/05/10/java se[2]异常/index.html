@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.4">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+  <meta name="keywords" content="java,基础,">
+
+  <meta name="description"
+                                                                                  content="[TOC] 异常 什么是异常 异常定义：导致程序的正常流程被中断的事件，叫做异常 文件不存在异常  比如要打开d盘的LOL.exe文件，这个文件是有可能不存在的Java中通过 new FileInputStream(f)   试图打开某文件，就有可能抛出文件不存在异常FileNotFoundException如果不处理该异常，就会有编译错误                          123">
+  <meta name="keywords" content="java,基础">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="java se学习（二）异常">
+  <meta property="og:url"
+                                                                                  content="http://yoursite.com/2019/05/10/java se[2]异常/index.html">
+  <meta property="og:site_name" content="XiaoHan‘s Blog">
+  <meta property="og:description"
+                                                                                  content="[TOC] 异常 什么是异常 异常定义：导致程序的正常流程被中断的事件，叫做异常 文件不存在异常  比如要打开d盘的LOL.exe文件，这个文件是有可能不存在的Java中通过 new FileInputStream(f)   试图打开某文件，就有可能抛出文件不存在异常FileNotFoundException如果不处理该异常，就会有编译错误                          123">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/735.png">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/2412.png">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/742.png">
+  <meta property="og:image"
+                                                                                  content="https://images2018.cnblogs.com/blog/1042779/201806/1042779-20180602182608470-1815846206.png">
+  <meta property="og:updated_time" content="2019-05-10T13:05:59.874Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="java se学习（二）异常">
+  <meta name="twitter:description"
+                                                                                  content="[TOC] 异常 什么是异常 异常定义：导致程序的正常流程被中断的事件，叫做异常 文件不存在异常  比如要打开d盘的LOL.exe文件，这个文件是有可能不存在的Java中通过 new FileInputStream(f)   试图打开某文件，就有可能抛出文件不存在异常FileNotFoundException如果不处理该异常，就会有编译错误                          123">
+  <meta name="twitter:image" content="http://stepimagewm.how2j.cn/735.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.4',
+      sidebar: {
+        "position": "left",
+        "display": "post",
+        "offset": 12,
+        "b2t": false,
+        "scrollpercent": false,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/10/java se[2]异常/">
+
+  <title>java se学习（二）异常 | XiaoHan‘s Blog</title>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">XiaoHan‘s Blog</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">渣渣研究生的苦逼小站</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://yoursite.com/2019/05/10/java se[2]异常/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="Xiao Han">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image"
+                                                                                                    content="http://n.sinaimg.cn/translate/398/w599h599/20181121/RJCc-hnyuqhi6991299.jpg">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="XiaoHan‘s Blog">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">java
+                      se学习（二）异常</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-05-10T21:05:10+08:00">
+                          2019-05-10
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/后端/" itemprop="url" rel="index">
+                            <span itemprop="name">后端</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+
+                    <p>[TOC]</p>
+                    <h1 id="异常"><a href="#异常" class="headerlink"
+                                                                                                      title="异常"></a>异常
+                    </h1>
+                    <h2 id="什么是异常"><a href="#什么是异常" class="headerlink"
+                                                                                                      title="什么是异常"></a>什么是异常
+                    </h2>
+                    <p>异常定义：<br>导致程序的正常流程被中断的事件，叫做异常</p>
+                    <h3 id="文件不存在异常"><a href="#文件不存在异常" class="headerlink"
+                                                                                                      title="文件不存在异常"></a>文件不存在异常
+                    </h3>
+                    <p>比如要打开d盘的LOL.exe文件，这个文件是有可能不存在的<br>Java中通过 new
+                      FileInputStream(f)
+                      试图打开某文件，就有可能抛出<strong>文件不存在异常FileNotFoundException</strong><br>如果不处理该异常，就会有编译错误
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">          </span><br><span class="line">        File f= <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line">          </span><br><span class="line">        <span class="comment">//试图打开文件LOL.exe，会抛出FileNotFoundException，如果不处理该异常，就会有编译错误</span></span><br><span class="line">        <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">          </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="异常处理"><a href="#异常处理" class="headerlink"
+                                                                                                      title="异常处理"></a>异常处理
+                    </h2>
+                    <p>异常处理常见手段： try catch finally throws</p>
+                    <h3 id="try-catch"><a href="#try-catch" class="headerlink"
+                                                                                                      title="try catch"></a>try
+                      catch</h3>
+                    <p>1.将可能抛出FileNotFoundException
+                      <strong>文件不存在异常</strong>的代码放在try里<br>2.如果文件存在，就会顺序往下执行，并且不执行catch块中的代码
+                    </p>
+                    <ol start="3">
+                      <li>如果文件不存在，try 里的代码会立即终止，程序流程会运行到对应的catch块中</li>
+                      <li>e.printStackTrace();
+                        会打印出方法的调用痕迹，如此例，会打印出异常开始于TestException的第16行，这样就便于定位和分析到底哪里出了异常
+                      </li>
+                    </ol>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        File f= <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"试图打开 d:/LOL.exe"</span>);</span><br><span class="line">            <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">            System.out.println(<span class="string">"成功打开"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(FileNotFoundException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"d:/LOL.exe不存在"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="http://stepimagewm.how2j.cn/735.png"
+                                                                                                      alt="try catch">
+                    </p>
+                    <h3 id="使用异常的父类进行catch"><a href="#使用异常的父类进行catch" class="headerlink"
+                                                                                                      title="使用异常的父类进行catch"></a>使用异常的父类进行catch
+                    </h3>
+                    <p>
+                      FileNotFoundException是Exception的子类，使用Exception也可以catch住FileNotFoundException
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">          </span><br><span class="line">        File f= <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line">          </span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"试图打开 d:/LOL.exe"</span>);</span><br><span class="line">            <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">            System.out.println(<span class="string">"成功打开"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"d:/LOL.exe不存在"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">          </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="多异常捕捉办法1"><a href="#多异常捕捉办法1" class="headerlink"
+                                                                                                      title="多异常捕捉办法1"></a>多异常捕捉办法1
+                    </h3>
+                    <p>有的时候一段代码会抛出多种异常，解决办法之一是分别进行catch</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.text.ParseException;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        File f = <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"试图打开 d:/LOL.exe"</span>);</span><br><span class="line">            <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">            System.out.println(<span class="string">"成功打开"</span>);</span><br><span class="line">            SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">            Date d = sdf.parse(<span class="string">"2016-06-03"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"d:/LOL.exe不存在"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line">            System.out.println(<span class="string">"日期格式解析错误"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="多异常捕捉办法2"><a href="#多异常捕捉办法2" class="headerlink"
+                                                                                                      title="多异常捕捉办法2"></a>多异常捕捉办法2
+                    </h3>
+                    <p>另一个种办法是把多个异常，放在一个catch里统一捕捉 </p>
+                    <p> catch (FileNotFoundException | ParseException e) {</p>
+                    <p>这种方式从
+                      JDK7开始支持，好处是捕捉的代码<strong>更紧凑</strong>，不足之处是，一旦发生异常，<strong>不能确定到底是哪种异常</strong>，需要通过instanceof
+                      进行判断具体的异常类型</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"><span class="keyword">import</span> java.text.ParseException;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        File f = <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"试图打开 d:/LOL.exe"</span>);</span><br><span class="line">            <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">            System.out.println(<span class="string">"成功打开"</span>);</span><br><span class="line">            SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">            Date d = sdf.parse(<span class="string">"2016-06-03"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException | ParseException e) &#123;</span><br><span class="line">            <span class="keyword">if</span> (e <span class="keyword">instanceof</span> FileNotFoundException)</span><br><span class="line">                System.out.println(<span class="string">"d:/LOL.exe不存在"</span>);</span><br><span class="line">            <span class="keyword">if</span> (e <span class="keyword">instanceof</span> ParseException)</span><br><span class="line">                System.out.println(<span class="string">"日期格式解析错误"</span>);</span><br><span class="line"> </span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="finally"><a href="#finally" class="headerlink"
+                                                                                                      title="finally"></a>finally
+                    </h3>
+                    <p>无论是否出现异常，finally中的代码都会被执行</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        File f= <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"试图打开 d:/LOL.exe"</span>);</span><br><span class="line">            <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">            System.out.println(<span class="string">"成功打开"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(FileNotFoundException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"d:/LOL.exe不存在"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"无论文件是否存在， 都会执行的代码"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="throws"><a href="#throws" class="headerlink"
+                                                                                                      title="throws"></a>throws
+                    </h3>
+                    <p>
+                      考虑如下情况：<br>主方法调用method1<br>method1调用method2<br>method2中打开文件
+                    </p>
+                    <p>
+                      method2中需要进行异常处理<br>但是method2<strong>不打算处理</strong>，而是把这个异常通过<strong>throws**</strong>抛出去<strong><br>那么method1就会</strong>接到该异常<strong>。
+                        处理办法也是两种，要么是try
+                        catch处理掉，要么也是</strong>抛出去**。<br>method1选择本地try catch住
+                      一旦try
+                      catch住了，就相当于把这个异常消化掉了，主方法在调用method1的时候，就不需要进行异常处理了 </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        method1();</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            method2();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line"> </span><br><span class="line">        File f = <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line"> </span><br><span class="line">        System.out.println(<span class="string">"试图打开 d:/LOL.exe"</span>);</span><br><span class="line">        <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">        System.out.println(<span class="string">"成功打开"</span>);</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="throw-和-throws"><a href="#throw-和-throws" class="headerlink"
+                                                                                                      title="throw 和 throws"></a>throw
+                      和 throws</h3>
+                    <p>throws与throw这两个关键字接近，不过意义不一样，有如下区别：</p>
+                    <ol>
+                      <li>throws 出现在方法声明上，而throw通常都出现在方法体内。</li>
+                      <li>throws
+                        表示出现异常的一种可能性，并不一定会发生这些异常；throw则是抛出了异常，执行throw则一定抛出了某个异常对象。
+                      </li>
+                    </ol>
+                    <h2 id="异常分类"><a href="#异常分类" class="headerlink"
+                                                                                                      title="异常分类"></a>异常分类
+                    </h2>
+                    <p>异常分类： 可查异常，运行时异常和错误3种<br>其中，运行时异常和错误又叫非可查异常</p>
+                    <h3 id="可查异常"><a href="#可查异常" class="headerlink"
+                                                                                                      title="可查异常"></a>可查异常
+                    </h3>
+                    <p>可查异常：
+                      CheckedException<br>可查异常即<strong>必须进行处理的异常</strong>，要么try
+                      catch住,要么往外抛，谁调用，谁处理，比如
+                      FileNotFoundException<br>如果不处理，编译器，就不让你通过</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileNotFoundException;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">          </span><br><span class="line">        File f= <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line">          </span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">"试图打开 d:/LOL.exe"</span>);</span><br><span class="line">            <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">            System.out.println(<span class="string">"成功打开"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(FileNotFoundException e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"d:/LOL.exe不存在"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">          </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="运行时异常"><a href="#运行时异常" class="headerlink"
+                                                                                                      title="运行时异常"></a>运行时异常
+                    </h3>
+                    <p>运行时异常RuntimeException指： <strong>不是必须进行try
+                        catch的异常</strong><br><strong>常见运行时异常:</strong><br>除数不能为0异常:ArithmeticException<br>下标越界异常:ArrayIndexOutOfBoundsException<br>空指针异常:NullPointerException<br>在编写代码的时候，依然可以使用try
+                      catch throws进行处理，与可查异常不同之处在于，<strong>即便不进行try
+                        catch，也不会有编译错误</strong><br>Java之所以会设计运行时异常的原因之一，是因为下标越界，空指针这些运行时异常<strong>太过于普遍</strong>，如果都需要进行捕捉，代码的可读性就会变得很糟糕。
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//任何除数不能为0:ArithmeticException</span></span><br><span class="line">        <span class="keyword">int</span> k = <span class="number">5</span>/<span class="number">0</span>;</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//下标越界异常：ArrayIndexOutOfBoundsException</span></span><br><span class="line">        <span class="keyword">int</span> j[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line">        j[<span class="number">10</span>] = <span class="number">10</span>;</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//空指针异常：NullPointerException</span></span><br><span class="line">        String str = <span class="keyword">null</span>;</span><br><span class="line">        str.length();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="错误"><a href="#错误" class="headerlink"
+                                                                                                      title="错误"></a>错误
+                    </h3>
+                    <p>
+                      错误Error，指的是<strong>系统级别的异常</strong>，通常是内存用光了<br>在<strong>默认设置下</strong>，一般java程序启动的时候，最大可以使用16m的内存<br>如例不停的给StringBuffer追加字符，很快就把内存使用光了。抛出<strong>OutOfMemoryError</strong><br>与运行时异常一样，错误也是不要求强制捕捉的
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">     </span><br><span class="line">        StringBuffer sb =<span class="keyword">new</span> StringBuffer();</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; Integer.MAX_VALUE; i++) &#123;</span><br><span class="line">            sb.append(<span class="string">'a'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="总结"><a href="#总结" class="headerlink"
+                                                                                                      title="总结"></a>总结
+                    </h3>
+                    <p>总体上异常分三类： </p>
+                    <ol>
+                      <li>错误</li>
+                      <li>运行时异常</li>
+                      <li>可查异常</li>
+                    </ol>
+                    <p><img src="http://stepimagewm.how2j.cn/2412.png"
+                                                                                                      alt="三种分类">
+                    </p>
+                    <h3 id="问题"><a href="#问题" class="headerlink"
+                                                                                                      title="问题"></a>问题
+                    </h3>
+                    <p>运行时异常 RuntimeException，能否被捕捉？</p>
+                    <p>错误Error，能否被捕捉？ </p>
+                    <p><strong>面试题常问题：</strong> 运行时异常与非运行时异常的区别</p>
+                    <p>答：都可以捕捉</p>
+                    <p>运行时异常是不可查异常，不需要进行显式的捕捉</p>
+                    <p>非运行时异常是可查异常，必须进行显式的捕捉或者抛出</p>
+                    <h3 id="throwable"><a href="#throwable" class="headerlink"
+                                                                                                      title="throwable"></a>throwable
+                    </h3>
+                    <p>
+                      Throwable是类，Exception和Error都继承了该类<br>所以在捕捉的时候，也可以使用Throwable进行捕捉<br>如图：
+                      异常分<strong>Error</strong>和<strong>Exception</strong><br>Exception里又分<strong>运行时异常</strong>和<strong>可查异常</strong>。
+                    </p>
+                    <p><img src="http://stepimagewm.how2j.cn/742.png"
+                                                                                                      alt="Throwable">
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> exception;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        File f = <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">            <span class="comment">//使用Throwable进行异常捕捉</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Throwable t) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            t.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="练习-Throwsable"><a href="#练习-Throwsable" class="headerlink"
+                                                                                                      title="练习-Throwsable"></a>练习-Throwsable
+                    </h3>
+                    <p>
+                      在方法声明上，可以抛出指定的异常，比如FileNotFoundException<br>那么能否抛出Throwable这个类？
+                    </p>
+                    <p>这个方法的调用者又该如何处理？ </p>
+                    <p>答案：可以抛出</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestException</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        method1();</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            method2();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(Throwable t) &#123;</span><br><span class="line">            System.out.println(<span class="string">"系统打开失败"</span>);</span><br><span class="line">            t.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span> <span class="keyword">throws</span> Throwable</span>&#123;</span><br><span class="line">        File f = <span class="keyword">new</span> File(<span class="string">"d:/LOL.exe"</span>);</span><br><span class="line">         </span><br><span class="line">        System.out.println(<span class="string">"系统先尝试打开"</span>);</span><br><span class="line">        <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">        System.out.println(<span class="string">"系统打开成功"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>注意：将Throwable
+                      换成Exception就不行了，原因是：比如，它万一抛出来一个error，你让人家怎么捕获？前面类型转换的内容，这里将子类转父类，是不一定行的，相反的父类转子类是可行的。
+                    </p>
+                    <h3 id="自定义异常"><a href="#自定义异常" class="headerlink"
+                                                                                                      title="自定义异常"></a>自定义异常
+                    </h3>
+                    <h3 id="创建自定义异常"><a href="#创建自定义异常" class="headerlink"
+                                                                                                      title="创建自定义异常"></a>创建自定义异常
+                    </h3>
+                    <p>
+                      一个英雄攻击另一个英雄的时候，如果发现另一个英雄已经挂了，就会抛出EnemyHeroIsDeadException<br>创建一个类EnemyHeroIsDeadException，并继承Exception<br>提供两个构造方法
+                    </p>
+                    <ol>
+                      <li>无参的构造方法</li>
+                      <li>带参的构造方法，并调用父类的对应的构造方法</li>
+                    </ol>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EnemyHeroIsDeadException</span> <span class="keyword">extends</span> <span class="title">Exception</span></span>&#123;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EnemyHeroIsDeadException</span><span class="params">()</span></span>&#123;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">EnemyHeroIsDeadException</span><span class="params">(String msg)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="抛出自定义异常"><a href="#抛出自定义异常" class="headerlink"
+                                                                                                      title="抛出自定义异常"></a>抛出自定义异常
+                    </h3>
+                    <p> 在Hero的attack方法中，当发现敌方英雄的血量为0的时候，抛出该异常</p>
+                    <ol>
+                      <li>创建一个EnemyHeroIsDeadException实例</li>
+                      <li>通过throw 抛出该异常</li>
+                      <li>当前方法通过 throws 抛出该异常</li>
+                    </ol>
+                    <p>在外部调用attack方法的时候，就需要进行捕捉，并且捕捉的时候，可以通过e.getMessage()
+                      获取当时出错的具体原因 </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> charactor;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">float</span> hp;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">attackHero</span><span class="params">(Hero h)</span> <span class="keyword">throws</span> EnemyHeroIsDeadException</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(h.hp == <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> EnemyHeroIsDeadException(h.name + <span class="string">" 已经挂了,不需要施放技能"</span> );</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">EnemyHeroIsDeadException</span> <span class="keyword">extends</span> <span class="title">Exception</span></span>&#123;</span><br><span class="line">         </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">EnemyHeroIsDeadException</span><span class="params">()</span></span>&#123;</span><br><span class="line">             </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">EnemyHeroIsDeadException</span><span class="params">(String msg)</span></span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        Hero garen =  <span class="keyword">new</span> Hero();</span><br><span class="line">        garen.name = <span class="string">"盖伦"</span>;</span><br><span class="line">        garen.hp = <span class="number">616</span>;</span><br><span class="line"> </span><br><span class="line">        Hero teemo =  <span class="keyword">new</span> Hero();</span><br><span class="line">        teemo.name = <span class="string">"提莫"</span>;</span><br><span class="line">        teemo.hp = <span class="number">0</span>;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            garen.attackHero(teemo);</span><br><span class="line">             </span><br><span class="line">        &#125; <span class="keyword">catch</span> (EnemyHeroIsDeadException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            System.out.println(<span class="string">"异常的具体原因:"</span>+e.getMessage());</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="https://images2018.cnblogs.com/blog/1042779/201806/1042779-20180602182608470-1815846206.png"
+                                                                                                      alt="img">
+                    </p>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/java/" rel="tag"># java</a>
+
+                      <a href="/tags/基础/" rel="tag"># 基础</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/05/08/java se[1]/" rel="next"
+                                                                                                        title="java se学习（一）">
+                          <i class="fa fa-chevron-left"></i> java se学习（一）
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                      </div>
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="http://n.sinaimg.cn/translate/398/w599h599/20181121/RJCc-hnyuqhi6991299.jpg"
+                                                                                                  alt="Xiao Han">
+
+                  <p class="site-author-name" itemprop="name">Xiao Han</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                  </p>
+                </div>
+
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">3</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/index.html">
+                      <span class="site-state-item-count">1</span>
+                      <span class="site-state-item-name">分类</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">2</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiaohan1992" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiaohan1992a@163.com" target="_blank"
+                                                                                                    title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                </div>
+
+                <div
+                                                                                                class="links-of-blogroll motion-element links-of-blogroll-block">
+                  <div class="links-of-blogroll-title">
+                    <i class="fa  fa-fw fa-link"></i>
+                    Links
+                  </div>
+                  <ul class="links-of-blogroll-list">
+
+                    <li class="links-of-blogroll-item">
+                      <a href="https://ilovemenghan.top" title="XiaoHan"
+                                                                                                      target="_blank">XiaoHan</a>
+                    </li>
+
+                  </ul>
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#异常"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">异常</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#什么是异常"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">什么是异常</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#文件不存在异常"><span
+                                                                                                                class="nav-number">1.1.1.</span>
+                                <span class="nav-text">文件不存在异常
+                                </span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#异常处理"><span
+                                                                                                            class="nav-number">1.2.</span>
+                            <span class="nav-text">异常处理</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#try-catch"><span
+                                                                                                                class="nav-number">1.2.1.</span>
+                                <span class="nav-text">try
+                                  catch</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#使用异常的父类进行catch"><span
+                                                                                                                class="nav-number">1.2.2.</span>
+                                <span class="nav-text">使用异常的父类进行catch
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#多异常捕捉办法1"><span
+                                                                                                                class="nav-number">1.2.3.</span>
+                                <span class="nav-text">多异常捕捉办法1
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#多异常捕捉办法2"><span
+                                                                                                                class="nav-number">1.2.4.</span>
+                                <span class="nav-text">多异常捕捉办法2
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#finally"><span
+                                                                                                                class="nav-number">1.2.5.</span>
+                                <span class="nav-text">finally
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#throws"><span
+                                                                                                                class="nav-number">1.2.6.</span>
+                                <span class="nav-text">throws
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#throw-和-throws"><span
+                                                                                                                class="nav-number">1.2.7.</span>
+                                <span class="nav-text">throw
+                                  和 throws</span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#异常分类"><span
+                                                                                                            class="nav-number">1.3.</span>
+                            <span class="nav-text">异常分类</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#可查异常"><span
+                                                                                                                class="nav-number">1.3.1.</span>
+                                <span class="nav-text">可查异常</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#运行时异常"><span
+                                                                                                                class="nav-number">1.3.2.</span>
+                                <span class="nav-text">运行时异常</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#错误"><span
+                                                                                                                class="nav-number">1.3.3.</span>
+                                <span class="nav-text">错误</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#总结"><span
+                                                                                                                class="nav-number">1.3.4.</span>
+                                <span class="nav-text">总结</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#问题"><span
+                                                                                                                class="nav-number">1.3.5.</span>
+                                <span class="nav-text">问题</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#throwable"><span
+                                                                                                                class="nav-number">1.3.6.</span>
+                                <span class="nav-text">throwable
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#练习-Throwsable"><span
+                                                                                                                class="nav-number">1.3.7.</span>
+                                <span class="nav-text">练习-Throwsable
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#自定义异常"><span
+                                                                                                                class="nav-number">1.3.8.</span>
+                                <span class="nav-text">自定义异常</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#创建自定义异常"><span
+                                                                                                                class="nav-number">1.3.9.</span>
+                                <span class="nav-text">创建自定义异常
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#抛出自定义异常"><span
+                                                                                                                class="nav-number">1.3.10.</span>
+                                <span class="nav-text">抛出自定义异常
+                                </span></a></li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">Xiao Han</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.4</div>
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+</body>
+
+</html>
