@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.4">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+  <meta name="keywords" content="java,基础,">
+
+  <meta name="description"
+                                                                                  content="[TOC] 字符串转换 数字转字符串  方法1： 使用String类的静态方法valueOf方法2： 先把基本类型装箱为对象，然后调用对象的toString                         1234567891011121314151617                       package digit;  public class TestNumber &amp;#123;">
+  <meta name="keywords" content="java,基础">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="java se学习（三）字符串">
+  <meta property="og:url"
+                                                                                  content="http://yoursite.com/2019/05/19/java se[3] String/index.html">
+  <meta property="og:site_name" content="XiaoHan‘s Blog">
+  <meta property="og:description"
+                                                                                  content="[TOC] 字符串转换 数字转字符串  方法1： 使用String类的静态方法valueOf方法2： 先把基本类型装箱为对象，然后调用对象的toString                         1234567891011121314151617                       package digit;  public class TestNumber &amp;#123;">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/683.png">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/696.png">
+  <meta property="og:image"
+                                                                                  content="c:/Users/xiaoyh/AppData/Roaming/Typora/typora-user-images/1557065668941.png">
+  <meta property="og:updated_time" content="2019-05-19T06:35:02.857Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="java se学习（三）字符串">
+  <meta name="twitter:description"
+                                                                                  content="[TOC] 字符串转换 数字转字符串  方法1： 使用String类的静态方法valueOf方法2： 先把基本类型装箱为对象，然后调用对象的toString                         1234567891011121314151617                       package digit;  public class TestNumber &amp;#123;">
+  <meta name="twitter:image" content="http://stepimagewm.how2j.cn/683.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.4',
+      sidebar: {
+        "position": "left",
+        "display": "post",
+        "offset": 12,
+        "b2t": false,
+        "scrollpercent": false,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical"
+                                                                                  href="http://yoursite.com/2019/05/19/java se[3] String/">
+
+  <title>java se学习（三）字符串 | XiaoHan‘s Blog</title>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://xiaohan1992@github.com" class="github-corner"
+                                                                                    aria-label="View source on GitHub"><svg
+                                                                                      width="80"
+                                                                                      height="80"
+                                                                                      viewbox="0 0 250 250"
+                                                                                      style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+                                                                                      aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                                                                                        fill="currentColor"
+                                                                                        style="transform-origin: 130px 106px;"
+                                                                                        class="octo-arm" />
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                                                                                        fill="currentColor"
+                                                                                        class="octo-body" />
+        </svg></a>
+    <style>
+      .github-corner:hover .octo-arm {
+        animation: octocat-wave 560ms ease-in-out
+      }
+
+      @keyframes octocat-wave {
+
+        0%,
+        100% {
+          transform: rotate(0)
+        }
+
+        20%,
+        60% {
+          transform: rotate(-25deg)
+        }
+
+        40%,
+        80% {
+          transform: rotate(10deg)
+        }
+      }
+
+      @media (max-width:500px) {
+        .github-corner:hover .octo-arm {
+          animation: none
+        }
+
+        .github-corner .octo-arm {
+          animation: octocat-wave 560ms ease-in-out
+        }
+      }
+
+    </style>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">XiaoHan‘s Blog</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">渣渣研究生的苦逼小站</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://yoursite.com/2019/05/19/java se[3] String/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="Xiao Han">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image"
+                                                                                                    content="http://n.sinaimg.cn/translate/398/w599h599/20181121/RJCc-hnyuqhi6991299.jpg">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="XiaoHan‘s Blog">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">java
+                      se学习（三）字符串</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-05-19T14:34:26+08:00">
+                          2019-05-19
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/后端/" itemprop="url" rel="index">
+                            <span itemprop="name">后端</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+
+                    <p>[TOC]</p>
+                    <h1 id="字符串转换"><a href="#字符串转换" class="headerlink"
+                                                                                                      title="字符串转换"></a>字符串转换
+                    </h1>
+                    <h2 id="数字转字符串"><a href="#数字转字符串" class="headerlink"
+                                                                                                      title="数字转字符串"></a>数字转字符串
+                    </h2>
+                    <p>方法1： 使用String类的静态方法valueOf<br>方法2：
+                      先把基本类型装箱为对象，然后调用对象的toString</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> digit;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestNumber</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">5</span>;</span><br><span class="line">        </span><br><span class="line">         </span><br><span class="line">        <span class="comment">//方法1</span></span><br><span class="line">        String str = String.valueOf(i);</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//方法2</span></span><br><span class="line">        Integer it = i;</span><br><span class="line">        String str2 = it.toString();</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="字符串转数字"><a href="#字符串转数字" class="headerlink"
+                                                                                                      title="字符串转数字"></a>字符串转数字
+                    </h2>
+                    <p>调用Integer的静态方法parseInt</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> digit;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestNumber</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        String str = <span class="string">"999"</span>;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">int</span> i= Integer.parseInt(str);</span><br><span class="line">         </span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="格式化输出"><a href="#格式化输出" class="headerlink"
+                                                                                                      title="格式化输出"></a>格式化输出
+                    </h2>
+                    <p>
+                      如果不使用格式化输出，就需要进行字符串连接，如果变量比较多，拼接就会显得繁琐<br>使用格式化输出，就可以简洁明了
+                    </p>
+                    <p>%s 表示字符串<br>%d 表示数字<br>%n 表示换行 </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> digit;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestNumber</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        String name =<span class="string">"盖伦"</span>;</span><br><span class="line">        <span class="keyword">int</span> kill = <span class="number">8</span>;</span><br><span class="line">        String title=<span class="string">"超神"</span>;</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//直接使用+进行字符串连接，编码感觉会比较繁琐，并且维护性差,易读性差</span></span><br><span class="line">        String sentence = name+ <span class="string">" 在进行了连续 "</span> + kill + <span class="string">" 次击杀后，获得了 "</span> + title +<span class="string">" 的称号"</span>;</span><br><span class="line">         </span><br><span class="line">        System.out.println(sentence);</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//使用格式化输出</span></span><br><span class="line">        <span class="comment">//%s表示字符串，%d表示数字,%n表示换行</span></span><br><span class="line">        String sentenceFormat =<span class="string">"%s 在进行了连续 %d 次击杀后，获得了 %s 的称号%n"</span>;</span><br><span class="line">        System.out.printf(sentenceFormat,name,kill,title);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="printf和format"><a href="#printf和format" class="headerlink"
+                                                                                                      title="printf和format"></a>printf和format
+                    </h3>
+                    <p>printf和format能够达到一模一样的效果，<a href="http://how2j.cn/k/helloworld/helloworld-eclipse-tips/300.html#step706"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">如何通过eclipse查看java源代码</a>
+                      可以看到，在printf中直接调用了format</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> digit;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestNumber</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        String name =<span class="string">"盖伦"</span>;</span><br><span class="line">        <span class="keyword">int</span> kill = <span class="number">8</span>;</span><br><span class="line">        String title=<span class="string">"超神"</span>;</span><br><span class="line">         </span><br><span class="line">        String sentenceFormat =<span class="string">"%s 在进行了连续 %d 次击杀后，获得了 %s 的称号%n"</span>;</span><br><span class="line">        <span class="comment">//使用printf格式化输出</span></span><br><span class="line">        System.out.printf(sentenceFormat,name,kill,title);</span><br><span class="line">        <span class="comment">//使用format格式化输出</span></span><br><span class="line">        System.out.format(sentenceFormat,name,kill,title);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="换行符"><a href="#换行符" class="headerlink"
+                                                                                                      title="换行符"></a>换行符
+                    </h3>
+                    <p><strong>换行符</strong>就是另起一行 — ‘\n’
+                      换行（newline）<br><strong>回车符</strong>就是回到一行的开头 — ‘\r’
+                      回车（return）<br>在eclipse里敲一个回车，实际上是<strong>回车换行符</strong><br>Java是跨平台的编程语言，同样的代码，可以在不同的平台使用，比如Windows,Linux,Mac<br>然而在不同的操作系统，换行符是不一样的<br>（1）在DOS和Windows中，每行结尾是
+                      “\r\n”；<br>（2）Linux系统里，每行结尾只有 “\n”；<br>（3）Mac系统里，每行结尾是只有
+                      “\r”。<br>为了使得同一个java程序的换行符在所有的操作系统中都有一样的表现，使用%n，就可以做到平台无关的换行
+                    </p>
+                    <h3 id="总长度，左对齐，补0，千位分隔符，小数点位数，本地化表达"><a href="#总长度，左对齐，补0，千位分隔符，小数点位数，本地化表达" class="headerlink"
+                                                                                                      title="总长度，左对齐，补0，千位分隔符，小数点位数，本地化表达"></a>总长度，左对齐，补0，千位分隔符，小数点位数，本地化表达
+                    </h3>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> digit;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> java.util.Locale;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestNumber</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> year = <span class="number">2020</span>;</span><br><span class="line">        <span class="comment">//总长度，左对齐，补0，千位分隔符，小数点位数，本地化表达</span></span><br><span class="line">          </span><br><span class="line">        <span class="comment">//直接打印数字</span></span><br><span class="line">        System.out.format(<span class="string">"%d%n"</span>,year);</span><br><span class="line">        <span class="comment">//总长度是8,默认右对齐</span></span><br><span class="line">        System.out.format(<span class="string">"%8d%n"</span>,year);</span><br><span class="line">        <span class="comment">//总长度是8,左对齐</span></span><br><span class="line">        System.out.format(<span class="string">"%-8d%n"</span>,year);</span><br><span class="line">        <span class="comment">//总长度是8,不够补0</span></span><br><span class="line">        System.out.format(<span class="string">"%08d%n"</span>,year);</span><br><span class="line">        <span class="comment">//千位分隔符</span></span><br><span class="line">        System.out.format(<span class="string">"%,8d%n"</span>,year*<span class="number">10000</span>);</span><br><span class="line">  </span><br><span class="line">        <span class="comment">//小数点位数</span></span><br><span class="line">        System.out.format(<span class="string">"%.2f%n"</span>,Math.PI);</span><br><span class="line">          </span><br><span class="line">        <span class="comment">//不同国家的千位分隔符</span></span><br><span class="line">        System.out.format(Locale.FRANCE,<span class="string">"%,.2f%n"</span>,Math.PI*<span class="number">10000</span>);</span><br><span class="line">        System.out.format(Locale.US,<span class="string">"%,.2f%n"</span>,Math.PI*<span class="number">10000</span>);</span><br><span class="line">        System.out.format(Locale.UK,<span class="string">"%,.2f%n"</span>,Math.PI*<span class="number">10000</span>);</span><br><span class="line">          </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="http://stepimagewm.how2j.cn/683.png"
+                                                                                                      alt="æ»é¿åº¦ï¼å·¦å¯¹é½ï¼è¡¥0ï¼åä½åéç¬¦ï¼å°æ°ç¹ä½æ°ï¼æ¬å°åè¡¨è¾¾">
+                    </p>
+                    <h2 id="字符"><a href="#字符" class="headerlink"
+                                                                                                      title="字符"></a>字符
+                    </h2>
+                    <h3 id="保存一个字符的时候使用char"><a href="#保存一个字符的时候使用char" class="headerlink"
+                                                                                                      title="保存一个字符的时候使用char"></a>保存一个字符的时候使用char
+                    </h3>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestChar</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">        <span class="keyword">char</span> c2 = <span class="string">'1'</span>;<span class="comment">//字符1,而非数字1</span></span><br><span class="line">        <span class="keyword">char</span> c3 = <span class="string">'中'</span>;<span class="comment">//汉字字符</span></span><br><span class="line">        <span class="keyword">char</span> c4 = <span class="string">'ab'</span>; <span class="comment">//只能放一个字符</span></span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="char对应的封装类"><a href="#char对应的封装类" class="headerlink"
+                                                                                                      title="char对应的封装类"></a>char对应的封装类
+                    </h3>
+                    <p>char对应的封装类是Character<br>装箱拆箱概念，参考 <a href="http://how2j.cn/k/number-string/number-string-wrap/22.html"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">拆箱装箱</a>
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestChar</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> c1 = <span class="string">'a'</span>;</span><br><span class="line">        Character c = c1; <span class="comment">//自动装箱</span></span><br><span class="line">        c1 = c;<span class="comment">//自动拆箱</span></span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="Character常见方法"><a href="#Character常见方法" class="headerlink"
+                                                                                                      title="Character常见方法"></a>Character常见方法
+                    </h3>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestChar</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">        System.out.println(Character.isLetter(<span class="string">'a'</span>));<span class="comment">//判断是否为字母</span></span><br><span class="line">        System.out.println(Character.isDigit(<span class="string">'a'</span>)); <span class="comment">//判断是否为数字</span></span><br><span class="line">        System.out.println(Character.isWhitespace(<span class="string">' '</span>)); <span class="comment">//是否是空白</span></span><br><span class="line">        System.out.println(Character.isUpperCase(<span class="string">'a'</span>)); <span class="comment">//是否是大写</span></span><br><span class="line">        System.out.println(Character.isLowerCase(<span class="string">'a'</span>)); <span class="comment">//是否是小写</span></span><br><span class="line">         </span><br><span class="line">        System.out.println(Character.toUpperCase(<span class="string">'a'</span>)); <span class="comment">//转换为大写</span></span><br><span class="line">        System.out.println(Character.toLowerCase(<span class="string">'A'</span>)); <span class="comment">//转换为小写</span></span><br><span class="line"> </span><br><span class="line">        String a = <span class="string">'a'</span>; <span class="comment">//不能够直接把一个字符转换成字符串</span></span><br><span class="line">        String a2 = Character.toString(<span class="string">'a'</span>); <span class="comment">//转换为字符串</span></span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="常见转义"><a href="#常见转义" class="headerlink"
+                                                                                                      title="常见转义"></a>常见转义
+                    </h3>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestChar</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"使用空格无法达到对齐的效果"</span>);</span><br><span class="line">        System.out.println(<span class="string">"abc def"</span>);</span><br><span class="line">        System.out.println(<span class="string">"ab def"</span>);</span><br><span class="line">        System.out.println(<span class="string">"a def"</span>);</span><br><span class="line">          </span><br><span class="line">        System.out.println(<span class="string">"使用\\t制表符可以达到对齐的效果"</span>);</span><br><span class="line">        System.out.println(<span class="string">"abc\tdef"</span>);</span><br><span class="line">        System.out.println(<span class="string">"ab\tdef"</span>);</span><br><span class="line">        System.out.println(<span class="string">"a\tdef"</span>);</span><br><span class="line">         </span><br><span class="line">        System.out.println(<span class="string">"一个\\t制表符长度是8"</span>);</span><br><span class="line">        System.out.println(<span class="string">"12345678def"</span>);</span><br><span class="line">          </span><br><span class="line">        System.out.println(<span class="string">"换行符 \\n"</span>);</span><br><span class="line">        System.out.println(<span class="string">"abc\ndef"</span>);</span><br><span class="line"> </span><br><span class="line">        System.out.println(<span class="string">"单引号 \\'"</span>);</span><br><span class="line">        System.out.println(<span class="string">"abc\'def"</span>);</span><br><span class="line">        System.out.println(<span class="string">"双引号 \\\""</span>);</span><br><span class="line">        System.out.println(<span class="string">"abc\"def"</span>);</span><br><span class="line">        System.out.println(<span class="string">"反斜杠本身 \\"</span>);</span><br><span class="line">        System.out.println(<span class="string">"abc\\def"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="http://stepimagewm.how2j.cn/696.png"
+                                                                                                      alt="å¸¸è§è½¬ä¹">
+                    </p>
+                    <h2 id="字符串"><a href="#字符串" class="headerlink"
+                                                                                                      title="字符串"></a>字符串
+                    </h2>
+                    <h3 id="创建字符串"><a href="#创建字符串" class="headerlink"
+                                                                                                      title="创建字符串"></a>创建字符串
+                    </h3>
+                    <p>字符串即字符的组合，在Java中，字符串是一个类，所以我们见到的字符串都是对象<br>常见创建字符串手段：
+                    </p>
+                    <ol>
+                      <li>每当有一个<strong>字面值</strong>出现的时候，虚拟机就会创建一个字符串 </li>
+                      <li>调用String的构造方法创建一个字符串对象 </li>
+                      <li>通过+加号进行字符串拼接也会创建新的字符串对象 </li>
+                    </ol>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String garen =<span class="string">"盖伦"</span>; <span class="comment">//字面值,虚拟机碰到字面值就会创建一个字符串对象</span></span><br><span class="line">         </span><br><span class="line">        String teemo = <span class="keyword">new</span> String(<span class="string">"提莫"</span>); <span class="comment">//创建了两个字符串对象</span></span><br><span class="line">         </span><br><span class="line">        <span class="keyword">char</span>[] cs = <span class="keyword">new</span> <span class="keyword">char</span>[]&#123;<span class="string">'崔'</span>,<span class="string">'斯'</span>,<span class="string">'特'</span>&#125;;</span><br><span class="line">         </span><br><span class="line">        String hero = <span class="keyword">new</span> String(cs);<span class="comment">//  通过字符数组创建一个字符串对象</span></span><br><span class="line">         </span><br><span class="line">        String hero3 = garen + teemo;<span class="comment">//  通过+加号进行字符串拼接</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="final"><a href="#final" class="headerlink"
+                                                                                                      title="final"></a>final
+                    </h3>
+                    <p>String 被修饰为final,所以是不能被继承的</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyString str = <span class="keyword">new</span> MyString();</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">        <span class="comment">/*这里会报错，因为String不能被继承*/</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyString</span> <span class="keyword">extends</span> <span class="title">String</span></span>&#123;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="immutable"><a href="#immutable" class="headerlink"
+                                                                                                      title="immutable"></a>immutable
+                    </h3>
+                    <p>immutable 是指不可改变的<br>比如创建了一个字符串对象<br>String garen
+                      =”盖伦”;<br>不可改变的具体含义是指：<br>不能增加长度<br>不能减少长度<br>不能插入字符<br>不能删除字符<br>不能修改字符<br>一旦创建好这个字符串，里面的内容
+                      永远 不能改变</p>
+                    <p>String 的表现就像是一个常量</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span>  <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String garen =<span class="string">"盖伦"</span>;</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="字符串格式化"><a href="#字符串格式化" class="headerlink"
+                                                                                                      title="字符串格式化"></a>字符串格式化
+                    </h3>
+                    <p>
+                      如果不使用字符串格式化，就需要进行字符串连接，如果变量比较多，拼接就会显得繁琐<br>使用<strong>字符串格式化</strong>，就可以<strong>简洁明了</strong><br>更多的格式化规则，参考<a
+                                                                                                      href="http://how2j.cn/k/number-string/number-string-foramt/320.html"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">格式化输出</a>
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> character;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">        String name =<span class="string">"盖伦"</span>;</span><br><span class="line">        <span class="keyword">int</span> kill = <span class="number">8</span>;</span><br><span class="line">        String title=<span class="string">"超神"</span>;</span><br><span class="line">          </span><br><span class="line">        <span class="comment">//直接使用+进行字符串连接，编码感觉会比较繁琐，并且维护性差,易读性差</span></span><br><span class="line">        String sentence = name+ <span class="string">" 在进行了连续 "</span> + kill + <span class="string">" 次击杀后，获得了 "</span> + title +<span class="string">" 的称号"</span>;</span><br><span class="line">          </span><br><span class="line">        System.out.println(sentence);</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//格式化字符串</span></span><br><span class="line">        <span class="comment">//%s表示字符串，%d表示数字,%n表示换行</span></span><br><span class="line">        String sentenceFormat =<span class="string">"%s 在进行了连续 %d 次击杀后，获得了 %s 的称号%n"</span>;</span><br><span class="line">         </span><br><span class="line">        String sentence2 = String.format(sentenceFormat, name,kill,title);</span><br><span class="line">         </span><br><span class="line">        System.out.println(sentence2);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="操纵字符串"><a href="#操纵字符串" class="headerlink"
+                                                                                                      title="操纵字符串"></a>操纵字符串
+                    </h3>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th style="text-align:left">关键字</th>
+                          <th style="text-align:left">简介</th>
+                          <th style="text-align:left">示例代码</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td style="text-align:left">charAt</td>
+                          <td style="text-align:left">获取字符</td>
+                          <td style="text-align:left"><a href="http://how2j.cn/k/number-string/number-string-manipulate/325.html#step712"
+                                                                                                            target="_blank"
+                                                                                                            rel="noopener">示例代码</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:left">toCharArray</td>
+                          <td style="text-align:left">获取对应的字符数组</td>
+                          <td style="text-align:left"><a href="http://how2j.cn/k/number-string/number-string-manipulate/325.html#step719"
+                                                                                                            target="_blank"
+                                                                                                            rel="noopener">示例代码</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:left">subString</td>
+                          <td style="text-align:left">截取子字符串</td>
+                          <td style="text-align:left"><a href="http://how2j.cn/k/number-string/number-string-manipulate/325.html#step713"
+                                                                                                            target="_blank"
+                                                                                                            rel="noopener">示例代码</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:left">split</td>
+                          <td style="text-align:left">分隔</td>
+                          <td style="text-align:left"><a href="http://how2j.cn/k/number-string/number-string-manipulate/325.html#step714"
+                                                                                                            target="_blank"
+                                                                                                            rel="noopener">示例代码</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:left">trim</td>
+                          <td style="text-align:left">去掉首尾空格</td>
+                          <td style="text-align:left"><a href="http://how2j.cn/k/number-string/number-string-manipulate/325.html#step715"
+                                                                                                            target="_blank"
+                                                                                                            rel="noopener">示例代码</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:left">toLowerCase， toUpperCase
+                          </td>
+                          <td style="text-align:left">大小写</td>
+                          <td style="text-align:left"><a href="http://how2j.cn/k/number-string/number-string-manipulate/325.html#step716"
+                                                                                                            target="_blank"
+                                                                                                            rel="noopener">示例代码</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:left">indexOf， lastIndexOf
+                            ，contains</td>
+                          <td style="text-align:left">定位</td>
+                          <td style="text-align:left"><a href="http://how2j.cn/k/number-string/number-string-manipulate/325.html#step717"
+                                                                                                            target="_blank"
+                                                                                                            rel="noopener">示例代码</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:left">replaceAll ，replaceFirst
+                          </td>
+                          <td style="text-align:left">替换</td>
+                          <td style="text-align:left"><a href="http://how2j.cn/k/number-string/number-string-manipulate/325.html#step718"
+                                                                                                            target="_blank"
+                                                                                                            rel="noopener">示例代码</a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="text-align:left"></td>
+                          <td style="text-align:left"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <h3 id="比较字符串"><a href="#比较字符串" class="headerlink"
+                                                                                                      title="比较字符串"></a>比较字符串
+                    </h3>
+                    <h4 id="是否是同一个对象"><a href="#是否是同一个对象" class="headerlink"
+                                                                                                      title="是否是同一个对象"></a>是否是同一个对象
+                    </h4>
+                    <p>str1和str2的内容一定是一样的！<br>但是，并不是同一个字符串对象</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">        String str1 = <span class="string">"the light"</span>;</span><br><span class="line">         </span><br><span class="line">        String str2 = <span class="keyword">new</span> String(str1);</span><br><span class="line">         </span><br><span class="line">        <span class="comment">//==用于判断是否是同一个字符串对象</span></span><br><span class="line">        System.out.println( str1  ==  str2);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h4 id="是否是同一个对象-特例"><a href="#是否是同一个对象-特例" class="headerlink"
+                                                                                                      title="是否是同一个对象-特例"></a>是否是同一个对象-特例
+                    </h4>
+                    <p>一般说来，编译器每碰到一个字符串的字面值，就会创建一个新的对象<br>所以在第6行会创建了一个新的字符串”the
+                      light”<br>但是在第7行，编译器发现已经存在现成的”the
+                      light”，那么就直接拿来使用，而没有进行重复创建</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str1 = <span class="string">"the light"</span>;</span><br><span class="line">        String str3 = <span class="string">"the light"</span>;</span><br><span class="line">        System.out.println( str1  ==  str3);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h4 id="内容是否一致"><a href="#内容是否一致" class="headerlink"
+                                                                                                      title="内容是否一致"></a>内容是否一致
+                    </h4>
+                    <p>
+                      使用equals进行字符串内容的比较，必须大小写一致<br>equalsIgnoreCase，忽略大小写判断内容是否一致
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">        String str1 = <span class="string">"the light"</span>;</span><br><span class="line">          </span><br><span class="line">        String str2 = <span class="keyword">new</span> String(str1);</span><br><span class="line">         </span><br><span class="line">        String str3 = str1.toUpperCase();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">//==用于判断是否是同一个字符串对象</span></span><br><span class="line">        System.out.println( str1  ==  str2);</span><br><span class="line">         </span><br><span class="line">        System.out.println(str1.equals(str2));<span class="comment">//完全一样返回true</span></span><br><span class="line">         </span><br><span class="line">        System.out.println(str1.equals(str3));<span class="comment">//大小写不一样，返回false</span></span><br><span class="line">        System.out.println(str1.equalsIgnoreCase(str3));<span class="comment">//忽略大小写的比较，返回true</span></span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h4 id="是否以子字符串开始或者结束"><a href="#是否以子字符串开始或者结束" class="headerlink"
+                                                                                                      title="是否以子字符串开始或者结束"></a>是否以子字符串开始或者结束
+                    </h4>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str1 = <span class="string">"the light"</span>;</span><br><span class="line">         </span><br><span class="line">        String start = <span class="string">"the"</span>;</span><br><span class="line">        String end = <span class="string">"Ight"</span>;</span><br><span class="line">         </span><br><span class="line">        System.out.println(str1.startsWith(start));<span class="comment">//以...开始</span></span><br><span class="line">        System.out.println(str1.endsWith(end));<span class="comment">//以...结束</span></span><br><span class="line">          </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h3 id="StringBuffer"><a href="#StringBuffer" class="headerlink"
+                                                                                                      title="StringBuffer"></a>StringBuffer
+                    </h3>
+                    <p>StringBuffer是可变长的字符串</p>
+                    <h4 id="追加-删除-插入-反转"><a href="#追加-删除-插入-反转" class="headerlink"
+                                                                                                      title="追加 删除 插入 反转"></a>追加
+                      删除 插入 反转</h4>
+                    <p>append追加<br>delete 删除<br>insert 插入<br>reverse 反转</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str1 = <span class="string">"let there "</span>;</span><br><span class="line"> </span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer(str1); <span class="comment">//根据str1创建一个StringBuffer对象</span></span><br><span class="line">        sb.append(<span class="string">"be light"</span>); <span class="comment">//在最后追加</span></span><br><span class="line">         </span><br><span class="line">        System.out.println(sb);</span><br><span class="line">         </span><br><span class="line">        sb.delete(<span class="number">4</span>, <span class="number">10</span>);<span class="comment">//删除4-10之间的字符</span></span><br><span class="line">         </span><br><span class="line">        System.out.println(sb);</span><br><span class="line">         </span><br><span class="line">        sb.insert(<span class="number">4</span>, <span class="string">"there "</span>);<span class="comment">//在4这个位置插入 there</span></span><br><span class="line">         </span><br><span class="line">        System.out.println(sb);</span><br><span class="line">         </span><br><span class="line">        sb.reverse(); <span class="comment">//反转</span></span><br><span class="line">         </span><br><span class="line">        System.out.println(sb);</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="C:\Users\xiaoyh\AppData\Roaming\Typora\typora-user-images\1557065668941.png"
+                                                                                                      alt="1557065668941">
+                    </p>
+                    <h4 id="长度-容量"><a href="#长度-容量" class="headerlink"
+                                                                                                      title="长度 容量"></a>长度
+                      容量</h4>
+                    <p>
+                      为什么StringBuffer可以变长？<br>和String<strong>内部是一个字符数组</strong>一样，StringBuffer也维护了一个字符数组。
+                      但是，这个字符数组，<strong>留有冗余长度</strong><br>比如说new
+                      StringBuffer(“the”)，其内部的字符数组的长度，是19，而不是3，这样调用插入和追加，在现成的数组的基础上就可以完成了。<br>如果追加的长度超过了19，就会分配一个新的数组，长度比原来多一些，把原来的数据复制到新的数组中，<strong>看上去</strong>
+                      数组长度就变长了 参考<a href="http://how2j.cn/k/number-string/number-string-mystringbuilder/331.html"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">MyStringBuffer</a><br>length:
+                      “the”的长度 3<br>capacity: 分配的总空间 19</p>
+                    <p><strong>注：</strong> 19这个数量，不同的JDK数量是不一样的 </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> character;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestString</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String str1 = <span class="string">"the"</span>;</span><br><span class="line"> </span><br><span class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer(str1);</span><br><span class="line">         </span><br><span class="line">        System.out.println(sb.length()); <span class="comment">//内容长度</span></span><br><span class="line">         </span><br><span class="line">        System.out.println(sb.capacity());<span class="comment">//总空间</span></span><br><span class="line">  </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/java/" rel="tag"># java</a>
+
+                      <a href="/tags/基础/" rel="tag"># 基础</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/05/19/java se [9] 多线程/" rel="next"
+                                                                                                        title="java se学习（九）JAVA多线程">
+                          <i class="fa fa-chevron-left"></i> java se学习（九）JAVA多线程
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/05/19/java se[5] 文件/" rel="prev"
+                                                                                                        title="java se学习（五）I/O流">
+                          java se学习（五）I/O流 <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="http://n.sinaimg.cn/translate/398/w599h599/20181121/RJCc-hnyuqhi6991299.jpg"
+                                                                                                  alt="Xiao Han">
+
+                  <p class="site-author-name" itemprop="name">Xiao Han</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                  </p>
+                </div>
+
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">11</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/index.html">
+                      <span class="site-state-item-count">1</span>
+                      <span class="site-state-item-name">分类</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">3</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiaohan1992" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiaohan1992a@163.com" target="_blank"
+                                                                                                    title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                </div>
+
+                <div
+                                                                                                class="links-of-blogroll motion-element links-of-blogroll-block">
+                  <div class="links-of-blogroll-title">
+                    <i class="fa  fa-fw fa-link"></i>
+                    Links
+                  </div>
+                  <ul class="links-of-blogroll-list">
+
+                    <li class="links-of-blogroll-item">
+                      <a href="https://ilovemenghan.top" title="XiaoHan"
+                                                                                                      target="_blank">XiaoHan</a>
+                    </li>
+
+                  </ul>
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#字符串转换"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">字符串转换</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#数字转字符串"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">数字转字符串
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#字符串转数字"><span
+                                                                                                            class="nav-number">1.2.</span>
+                            <span class="nav-text">字符串转数字
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#格式化输出"><span
+                                                                                                            class="nav-number">1.3.</span>
+                            <span class="nav-text">格式化输出</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#printf和format"><span
+                                                                                                                class="nav-number">1.3.1.</span>
+                                <span class="nav-text">printf和format
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#换行符"><span
+                                                                                                                class="nav-number">1.3.2.</span>
+                                <span class="nav-text">换行符</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#总长度，左对齐，补0，千位分隔符，小数点位数，本地化表达"><span
+                                                                                                                class="nav-number">1.3.3.</span>
+                                <span
+                                                                                                                class="nav-text">总长度，左对齐，补0，千位分隔符，小数点位数，本地化表达
+                                </span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#字符"><span
+                                                                                                            class="nav-number">1.4.</span>
+                            <span class="nav-text">字符</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#保存一个字符的时候使用char"><span
+                                                                                                                class="nav-number">1.4.1.</span>
+                                <span class="nav-text">保存一个字符的时候使用char
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#char对应的封装类"><span
+                                                                                                                class="nav-number">1.4.2.</span>
+                                <span class="nav-text">char对应的封装类
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#Character常见方法"><span
+                                                                                                                class="nav-number">1.4.3.</span>
+                                <span class="nav-text">Character常见方法
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#常见转义"><span
+                                                                                                                class="nav-number">1.4.4.</span>
+                                <span class="nav-text">常见转义</span></a></li>
+                          </ol>
+                        </li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#字符串"><span
+                                                                                                            class="nav-number">1.5.</span>
+                            <span class="nav-text">字符串</span></a>
+                          <ol class="nav-child">
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#创建字符串"><span
+                                                                                                                class="nav-number">1.5.1.</span>
+                                <span class="nav-text">创建字符串</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#final"><span
+                                                                                                                class="nav-number">1.5.2.</span>
+                                <span class="nav-text">final</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#immutable"><span
+                                                                                                                class="nav-number">1.5.3.</span>
+                                <span class="nav-text">immutable
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#字符串格式化"><span
+                                                                                                                class="nav-number">1.5.4.</span>
+                                <span class="nav-text">字符串格式化
+                                </span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#操纵字符串"><span
+                                                                                                                class="nav-number">1.5.5.</span>
+                                <span class="nav-text">操纵字符串</span></a></li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#比较字符串"><span
+                                                                                                                class="nav-number">1.5.6.</span>
+                                <span class="nav-text">比较字符串</span></a>
+                              <ol class="nav-child">
+                                <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                                  href="#是否是同一个对象"><span
+                                                                                                                    class="nav-number">1.5.6.1.</span>
+                                    <span class="nav-text">是否是同一个对象
+                                    </span></a></li>
+                                <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                                  href="#是否是同一个对象-特例"><span
+                                                                                                                    class="nav-number">1.5.6.2.</span>
+                                    <span class="nav-text">是否是同一个对象-特例
+                                    </span></a></li>
+                                <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                                  href="#内容是否一致"><span
+                                                                                                                    class="nav-number">1.5.6.3.</span>
+                                    <span class="nav-text">内容是否一致
+                                    </span></a></li>
+                                <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                                  href="#是否以子字符串开始或者结束"><span
+                                                                                                                    class="nav-number">1.5.6.4.</span>
+                                    <span class="nav-text">是否以子字符串开始或者结束
+                                    </span></a></li>
+                              </ol>
+                            </li>
+                            <li class="nav-item nav-level-3"><a class="nav-link"
+                                                                                                              href="#StringBuffer"><span
+                                                                                                                class="nav-number">1.5.7.</span>
+                                <span class="nav-text">StringBuffer
+                                </span></a>
+                              <ol class="nav-child">
+                                <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                                  href="#追加-删除-插入-反转"><span
+                                                                                                                    class="nav-number">1.5.7.1.</span>
+                                    <span class="nav-text">追加
+                                      删除 插入 反转</span></a></li>
+                                <li class="nav-item nav-level-4"><a class="nav-link"
+                                                                                                                  href="#长度-容量"><span
+                                                                                                                    class="nav-number">1.5.7.2.</span>
+                                    <span class="nav-text">长度 容量</span></a></li>
+                              </ol>
+                            </li>
+                          </ol>
+                        </li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">Xiao Han</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.4</div>
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
