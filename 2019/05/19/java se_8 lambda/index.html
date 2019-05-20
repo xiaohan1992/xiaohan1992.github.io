@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.4">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+  <meta name="keywords" content="java,中级,">
+
+  <meta name="description"
+                                                                                  content="JAVA   LAMBDA 表达式教程 假设一个情景：   找出满足条件的Hero本教程将从使用普通方法，匿名类，以及Lambda这几种方式，逐渐的引入Lambda的概念  普通方法 使用一个普通方法，在for循环遍历中进行条件判断，筛选出满足条件的数据                         1                       hp&amp;gt;100 &amp;amp;&amp;amp; dam">
+  <meta name="keywords" content="java,中级">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="java se学习（八）lambda表达式">
+  <meta property="og:url"
+                                                                                  content="http://yoursite.com/2019/05/19/java se_8 lambda/index.html">
+  <meta property="og:site_name" content="XiaoHan‘s Blog">
+  <meta property="og:description"
+                                                                                  content="JAVA   LAMBDA 表达式教程 假设一个情景：   找出满足条件的Hero本教程将从使用普通方法，匿名类，以及Lambda这几种方式，逐渐的引入Lambda的概念  普通方法 使用一个普通方法，在for循环遍历中进行条件判断，筛选出满足条件的数据                         1                       hp&amp;gt;100 &amp;amp;&amp;amp; dam">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/2551.png">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/2553.png">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/2561.png">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/2568.png">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/2569.png">
+  <meta property="og:updated_time" content="2019-05-19T06:37:01.374Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="java se学习（八）lambda表达式">
+  <meta name="twitter:description"
+                                                                                  content="JAVA   LAMBDA 表达式教程 假设一个情景：   找出满足条件的Hero本教程将从使用普通方法，匿名类，以及Lambda这几种方式，逐渐的引入Lambda的概念  普通方法 使用一个普通方法，在for循环遍历中进行条件判断，筛选出满足条件的数据                         1                       hp&amp;gt;100 &amp;amp;&amp;amp; dam">
+  <meta name="twitter:image" content="http://stepimagewm.how2j.cn/2551.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.4',
+      sidebar: {
+        "position": "left",
+        "display": "post",
+        "offset": 12,
+        "b2t": false,
+        "scrollpercent": false,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/19/java se_8 lambda/">
+
+  <title>java se学习（八）lambda表达式 | XiaoHan‘s Blog</title>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://xiaohan1992@github.com" class="github-corner"
+                                                                                    aria-label="View source on GitHub"><svg
+                                                                                      width="80"
+                                                                                      height="80"
+                                                                                      viewbox="0 0 250 250"
+                                                                                      style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+                                                                                      aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                                                                                        fill="currentColor"
+                                                                                        style="transform-origin: 130px 106px;"
+                                                                                        class="octo-arm" />
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                                                                                        fill="currentColor"
+                                                                                        class="octo-body" />
+        </svg></a>
+    <style>
+      .github-corner:hover .octo-arm {
+        animation: octocat-wave 560ms ease-in-out
+      }
+
+      @keyframes octocat-wave {
+
+        0%,
+        100% {
+          transform: rotate(0)
+        }
+
+        20%,
+        60% {
+          transform: rotate(-25deg)
+        }
+
+        40%,
+        80% {
+          transform: rotate(10deg)
+        }
+      }
+
+      @media (max-width:500px) {
+        .github-corner:hover .octo-arm {
+          animation: none
+        }
+
+        .github-corner .octo-arm {
+          animation: octocat-wave 560ms ease-in-out
+        }
+      }
+
+    </style>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">XiaoHan‘s Blog</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">渣渣研究生的苦逼小站</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://yoursite.com/2019/05/19/java se_8 lambda/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="Xiao Han">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image"
+                                                                                                    content="http://n.sinaimg.cn/translate/398/w599h599/20181121/RJCc-hnyuqhi6991299.jpg">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="XiaoHan‘s Blog">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">java
+                      se学习（八）lambda表达式</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-05-19T14:34:27+08:00">
+                          2019-05-19
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/后端/" itemprop="url" rel="index">
+                            <span itemprop="name">后端</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+
+                    <h1 id="JAVA-LAMBDA-表达式教程"><a href="#JAVA-LAMBDA-表达式教程" class="headerlink"
+                                                                                                      title="JAVA LAMBDA 表达式教程"></a>JAVA
+                      LAMBDA 表达式教程</h1>
+                    <p>假设一个情景：
+                      找出满足条件的Hero<br>本教程将从使用<strong>普通方法</strong>，<strong>匿名类</strong>，以及<strong>Lambda</strong>这几种方式，逐渐的引入Lambda的概念
+                    </p>
+                    <h2 id="普通方法"><a href="#普通方法" class="headerlink"
+                                                                                                      title="普通方法"></a>普通方法
+                    </h2>
+                    <p>使用一个普通方法，在for循环遍历中进行条件判断，筛选出满足条件的数据</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">hp&gt;<span class="number">100</span> &amp;&amp; damage&lt;<span class="number">50</span></span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"初始化后的集合："</span>);</span><br><span class="line">        System.out.println(heros);</span><br><span class="line">        System.out.println(<span class="string">"筛选出 hp&gt;100 &amp;&amp; damange&lt;50的英雄"</span>);</span><br><span class="line">        filter(heros);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(List&lt;Hero&gt; heros)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Hero hero : heros) &#123;</span><br><span class="line">            <span class="keyword">if</span>(hero.hp&gt;<span class="number">100</span> &amp;&amp; hero.damage&lt;<span class="number">50</span>)</span><br><span class="line">                System.out.print(hero);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="http://stepimagewm.how2j.cn/2551.png"
+                                                                                                      alt="æ®éæ¹æ³">
+                    </p>
+                    <h2 id="匿名类方式"><a href="#匿名类方式" class="headerlink"
+                                                                                                      title="匿名类方式"></a>匿名类方式
+                    </h2>
+                    <p>首先准备一个接口HeroChecker，提供一个test(Hero)方法<br>然后通过匿名类的方式，实现这个接口
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">HeroChecker checker = <span class="keyword">new</span> HeroChecker() &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Hero h)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"初始化后的集合："</span>);</span><br><span class="line">        System.out.println(heros);</span><br><span class="line">        System.out.println(<span class="string">"使用匿名类的方式，筛选出 hp&gt;100 &amp;&amp; damange&lt;50的英雄"</span>);</span><br><span class="line">        HeroChecker checker = <span class="keyword">new</span> HeroChecker() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Hero h)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">           </span><br><span class="line">        filter(heros,checker);</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(List&lt;Hero&gt; heros,HeroChecker checker)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Hero hero : heros) &#123;</span><br><span class="line">            <span class="keyword">if</span>(checker.test(hero))</span><br><span class="line">                System.out.print(hero);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HeroChecker</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Hero h)</span></span>;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="Lambda方式"><a href="#Lambda方式" class="headerlink"
+                                                                                                      title="Lambda方式"></a>Lambda方式
+                    </h2>
+                    <p>使用Lambda方式筛选出数据</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">filter(heros,(h)-&gt;h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>同样是调用filter方法，从上一步的传递匿名类对象，变成了传递一个Lambda表达式进去</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">h-&gt;h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span></span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>
+                      咋一看Lambda表达式似乎不好理解，其实很简单，下一步讲解如何从一个匿名类一点点<strong>演变成</strong>Lambda表达式
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLamdba</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"初始化后的集合："</span>);</span><br><span class="line">        System.out.println(heros);</span><br><span class="line">        System.out.println(<span class="string">"使用Lamdba的方式，筛选出 hp&gt;100 &amp;&amp; damange&lt;50的英雄"</span>);</span><br><span class="line">        filter(heros,h-&gt;h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(List&lt;Hero&gt; heros,HeroChecker checker)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Hero hero : heros) &#123;</span><br><span class="line">            <span class="keyword">if</span>(checker.test(hero))</span><br><span class="line">                System.out.print(hero);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="http://stepimagewm.how2j.cn/2553.png"
+                                                                                                      alt="Lambdaæ¹å¼">
+                    </p>
+                    <h2 id="从匿名类演变成Lambda表达式"><a href="#从匿名类演变成Lambda表达式" class="headerlink"
+                                                                                                      title="从匿名类演变成Lambda表达式"></a>从匿名类演变成Lambda表达式
+                    </h2>
+                    <p>Lambda表达式可以看成是匿名类一点点<strong>演变过来</strong></p>
+                    <ol>
+                      <li>匿名类的正常写法</li>
+                    </ol>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">HeroChecker c1 = <span class="keyword">new</span> HeroChecker() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Hero h)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <ol start="2">
+                      <li>
+                        把外面的壳子去掉<br>只保留<strong>方法参数</strong>和<strong>方法体</strong><br>参数和方法体之间加上符号
+                        <strong>-&gt;</strong></li>
+                    </ol>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">HeroChecker c2 = (Hero h) -&gt;&#123;</span><br><span class="line">	<span class="keyword">return</span> h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>;</span><br><span class="line">&#125;;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <ol start="3">
+                      <li>把return和{}去掉</li>
+                    </ol>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">HeroChecker c3 = (Hero h) -&gt;h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <ol start="4">
+                      <li>把 参数类型和圆括号去掉(只有一个参数的时候，才可以去掉圆括号)</li>
+                    </ol>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">HeroChecker c4 = h -&gt;h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <ol start="5">
+                      <li>把c4作为参数传递进去</li>
+                    </ol>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">filter(heros,c4);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <ol start="6">
+                      <li>直接把表达式传递进去</li>
+                    </ol>
+                    <p>filter(heros, h -&gt; h.hp &gt; 100 &amp;&amp; h.damage
+                      &lt; 50);</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLamdba</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"初始化后的集合："</span>);</span><br><span class="line">        System.out.println(heros);</span><br><span class="line">        System.out.println(<span class="string">"使用匿名类的方式，筛选出 hp&gt;100 &amp;&amp; damange&lt;50的英雄"</span>);</span><br><span class="line">        <span class="comment">// 匿名类的正常写法</span></span><br><span class="line">        HeroChecker c1 = <span class="keyword">new</span> HeroChecker() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Hero h)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">// 把new HeroChcekcer，方法名，方法返回类型信息去掉</span></span><br><span class="line">        <span class="comment">// 只保留方法参数和方法体</span></span><br><span class="line">        <span class="comment">// 参数和方法体之间加上符号 -&gt;</span></span><br><span class="line">        HeroChecker c2 = (Hero h) -&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>;</span><br><span class="line">        &#125;;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 把return和&#123;&#125;去掉</span></span><br><span class="line">        HeroChecker c3 = (Hero h) -&gt; h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 把 参数类型和圆括号去掉</span></span><br><span class="line">        HeroChecker c4 = h -&gt; h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 把c4作为参数传递进去</span></span><br><span class="line">        filter(heros, c4);</span><br><span class="line">         </span><br><span class="line">        <span class="comment">// 直接把表达式传递进去</span></span><br><span class="line">        filter(heros, h -&gt; h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(List&lt;Hero&gt; heros, HeroChecker checker)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Hero hero : heros) &#123;</span><br><span class="line">            <span class="keyword">if</span> (checker.test(hero))</span><br><span class="line">                System.out.print(hero);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="匿名方法"><a href="#匿名方法" class="headerlink"
+                                                                                                      title="匿名方法"></a>匿名方法
+                    </h2>
+                    <p>与<a href="http://how2j.cn/k/interface-inheritance/interface-inheritance-inner-class/322.html#step687"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">匿名类</a>
+                      概念相比较，<br>Lambda
+                      其实就是<strong>匿名方法</strong>，这是一种<strong>把方法作为参数</strong>进行传递的编程思想。
+                    </p>
+                    <p>虽然代码是这么写 </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">filter(heros, h -&gt; h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>但是，Java会在背后，悄悄的，把这些都还原成<a href="http://how2j.cn/k/lambda/lambda-lamdba-tutorials/697.html#step2552"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">匿名类方式</a>。<br>引入Lambda表达式，会使得代码更加紧凑，而不是各种接口和匿名类到处飞。
+                    </p>
+                    <h2 id="Lambda的弊端"><a href="#Lambda的弊端" class="headerlink"
+                                                                                                      title="Lambda的弊端"></a>Lambda的弊端
+                    </h2>
+                    <p> Lambda表达式虽然带来了代码的简洁，但是也有其局限性。<br>\1.
+                      可读性差，与<strong>啰嗦的</strong>但是<strong>清晰的</strong>匿名类代码结构比较起来，Lambda表达式一旦变得比较长，就难以理解<br>\2.
+                      不便于调试，很难在Lambda表达式中增加调试信息，比如日志<br>\3.
+                      版本支持，Lambda表达式在JDK8版本中才开始支持，如果系统使用的是以前的版本，考虑系统的稳定性等原因，而不愿意升级，那么就无法使用。
+                    </p>
+                    <p>Lambda比较适合用在简短的业务代码中，并不适合用在复杂的系统中，会加大维护成本。 </p>
+                    <h1 id="方法引用"><a href="#方法引用" class="headerlink"
+                                                                                                      title="方法引用"></a>方法引用
+                    </h1>
+                    <h2 id="引用静态方法"><a href="#引用静态方法" class="headerlink"
+                                                                                                      title="引用静态方法"></a>引用静态方法
+                    </h2>
+                    <p>首先为TestLambda添加一个静态方法：</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">testHero</span><span class="params">(Hero h)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>Lambda表达式</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">filter(heros, h-&gt;h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>在Lambda表达式中调用这个静态方法：</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">filter(heros, h -&gt; TestLambda.testHero(h) );</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>调用静态方法还可以改写为：</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">filter(heros, TestLambda::testHero);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>这种方式就叫做<strong>引用静态方法</strong></p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"初始化后的集合："</span>);</span><br><span class="line">        System.out.println(heros);</span><br><span class="line">           </span><br><span class="line">        HeroChecker c = <span class="keyword">new</span> HeroChecker() &#123;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">test</span><span class="params">(Hero h)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">          </span><br><span class="line">        System.out.println(<span class="string">"使用匿名类过滤"</span>);</span><br><span class="line">        filter(heros, c);</span><br><span class="line">        System.out.println(<span class="string">"使用Lambda表达式"</span>);</span><br><span class="line">        filter(heros, h-&gt;h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>);</span><br><span class="line">        System.out.println(<span class="string">"在Lambda表达式中使用静态方法"</span>);</span><br><span class="line">        filter(heros, h -&gt; TestLambda.testHero(h) );</span><br><span class="line">        System.out.println(<span class="string">"直接引用静态方法"</span>);</span><br><span class="line">        filter(heros, TestLambda::testHero);</span><br><span class="line">    &#125;</span><br><span class="line">       </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">testHero</span><span class="params">(Hero h)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>;</span><br><span class="line">    &#125;</span><br><span class="line">       </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(List&lt;Hero&gt; heros, HeroChecker checker)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Hero hero : heros) &#123;</span><br><span class="line">            <span class="keyword">if</span> (checker.test(hero))</span><br><span class="line">                System.out.print(hero);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="引用对象方法"><a href="#引用对象方法" class="headerlink"
+                                                                                                      title="引用对象方法"></a>引用对象方法
+                    </h2>
+                    <p>与引用静态方法很类似，只是传递方法的时候，需要一个对象的存在</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">TestLambda testLambda = <span class="keyword">new</span> TestLambda();</span><br><span class="line"></span><br><span class="line">filter(heros, testLambda::testHero);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>这种方式叫做<strong>引用对象方法</strong></p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"初始化后的集合："</span>);</span><br><span class="line">        System.out.println(heros);</span><br><span class="line">     </span><br><span class="line">        System.out.println(<span class="string">"使用引用对象方法  的过滤结果："</span>);</span><br><span class="line">        <span class="comment">//使用类的对象方法</span></span><br><span class="line">        TestLambda testLambda = <span class="keyword">new</span> TestLambda();</span><br><span class="line">        filter(heros, testLambda::testHero);</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">testHero</span><span class="params">(Hero h)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>;</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(List&lt;Hero&gt; heros, HeroChecker checker)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Hero hero : heros) &#123;</span><br><span class="line">            <span class="keyword">if</span> (checker.test(hero))</span><br><span class="line">                System.out.print(hero);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="http://stepimagewm.how2j.cn/2561.png"
+                                                                                                      alt="å¼ç¨å¯¹è±¡æ¹æ³">
+                    </p>
+                    <h2 id="引用容器中的对象的方法"><a href="#引用容器中的对象的方法" class="headerlink"
+                                                                                                      title="引用容器中的对象的方法"></a>引用容器中的对象的方法
+                    </h2>
+                    <p>首先为Hero添加一个方法</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matched</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">this</span>.hp&gt;<span class="number">100</span> &amp;&amp; <span class="keyword">this</span>.damage&lt;<span class="number">50</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>使用Lambda表达式</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">filter(heros,h-&gt; h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span> );</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>在Lambda表达式中调用容器中的对象Hero的方法matched</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">filter(heros,h-&gt; h.matched() );</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>matched恰好就是容器中的对象Hero的方法，那就可以进一步改写为</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">filter(heros, Hero::matched);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>这种方式就叫做<strong>引用容器中的对象的方法</strong></p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"初始化后的集合："</span>);</span><br><span class="line">        System.out.println(heros);</span><br><span class="line">         </span><br><span class="line">        System.out.println(<span class="string">"Lambda表达式："</span>);       </span><br><span class="line">        filter(heros,h-&gt; h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span> );</span><br><span class="line"> </span><br><span class="line">        System.out.println(<span class="string">"Lambda表达式中调用容器中的对象的matched方法："</span>);       </span><br><span class="line">        filter(heros,h-&gt; h.matched() );</span><br><span class="line">  </span><br><span class="line">        System.out.println(<span class="string">"引用容器中对象的方法 之过滤结果："</span>);       </span><br><span class="line">        filter(heros, Hero::matched);</span><br><span class="line">    &#125;</span><br><span class="line">       </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">testHero</span><span class="params">(Hero h)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> h.hp&gt;<span class="number">100</span> &amp;&amp; h.damage&lt;<span class="number">50</span>;</span><br><span class="line">    &#125;</span><br><span class="line">       </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">filter</span><span class="params">(List&lt;Hero&gt; heros, HeroChecker checker)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Hero hero : heros) &#123;</span><br><span class="line">            <span class="keyword">if</span> (checker.test(hero))</span><br><span class="line">                System.out.print(hero);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h1 id="引用构造器"><a href="#引用构造器" class="headerlink"
+                                                                                                      title="引用构造器"></a>引用构造器
+                    </h1>
+                    <p>
+                      有的接口中的方法会返回一个对象，比如<strong>java.util.function.Supplier</strong>提供<br>了一个get方法，返回一个对象。
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Supplier</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">T <span class="title">get</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>设计一个方法，参数是这个接口</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List <span class="title">getList</span><span class="params">(Supplier&lt;List&gt; s)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> s.get();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>为了调用这个方法，有3种方式<br>第一种匿名类：</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">Supplier&lt;List&gt; s = <span class="keyword">new</span> Supplier&lt;List&gt;() &#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> List <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ArrayList();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">List list1 = getList(s);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>第二种：Lambda表达式</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">List list2 = getList(()-&gt;<span class="keyword">new</span> ArrayList());</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>第三种：引用构造器</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">List list3 = getList(ArrayList::new);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.function.Supplier;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Supplier&lt;List&gt; s = <span class="keyword">new</span> Supplier&lt;List&gt;() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> List <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> ArrayList();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">//匿名类</span></span><br><span class="line">    List list1 = getList(s);</span><br><span class="line">     </span><br><span class="line">    <span class="comment">//Lambda表达式</span></span><br><span class="line">    List list2 = getList(()-&gt;<span class="keyword">new</span> ArrayList());</span><br><span class="line">     </span><br><span class="line">    <span class="comment">//引用构造器</span></span><br><span class="line">    List list3 = getList(ArrayList::<span class="keyword">new</span>);</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List <span class="title">getList</span><span class="params">(Supplier&lt;List&gt; s)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s.get();</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h1 id="JAVA-集合的聚合操作"><a href="#JAVA-集合的聚合操作" class="headerlink"
+                                                                                                      title="JAVA 集合的聚合操作"></a>JAVA
+                      集合的聚合操作</h1>
+                    <p>遍历数据的传统方式就是使用for循环，然后条件判断，最后打印出满足条件的数据</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">for</span> (Hero h : heros) &#123;</span><br><span class="line">   <span class="keyword">if</span> (h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>)</span><br><span class="line">      System.out.println(h.name);</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>使用聚合操作方式，<strong>画风</strong>就发生了变化：</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">heros</span><br><span class="line">	.stream()</span><br><span class="line">	.filter(h -&gt; h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>)</span><br><span class="line">	.forEach(h -&gt; System.out.println(h.name));</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAggregate</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        System.out.println(<span class="string">"初始化后的集合："</span>);</span><br><span class="line">        System.out.println(heros);</span><br><span class="line">        System.out.println(<span class="string">"查询条件：hp&gt;100 &amp;&amp; damage&lt;50"</span>);</span><br><span class="line">        System.out.println(<span class="string">"通过传统操作方式找出满足条件的数据："</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span> (Hero h : heros) &#123;</span><br><span class="line">            <span class="keyword">if</span> (h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>)</span><br><span class="line">                System.out.println(h.name);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        System.out.println(<span class="string">"通过聚合操作方式找出满足条件的数据："</span>);</span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .filter(h -&gt; h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>)</span><br><span class="line">            .forEach(h -&gt; System.out.println(h.name));</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="Stream和管道的概念"><a href="#Stream和管道的概念" class="headerlink"
+                                                                                                      title="Stream和管道的概念"></a>Stream和管道的概念
+                    </h2>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">heros</span><br><span class="line"></span><br><span class="line">​	.stream()</span><br><span class="line"></span><br><span class="line">​	.filter(h -&gt; h.hp &gt; <span class="number">100</span> &amp;&amp; h.damage &lt; <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">​	.forEach(h -&gt; System.out.println(h.name));</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>
+                      要了解聚合操作，首先要建立<strong>Stream</strong>和<strong>管道</strong>的概念<br><strong>Stream</strong>
+                      和Collection结构化的数据不一样，Stream是一系列的元素，就像是生产线上的罐头一样，一串串的出来。<br><strong>管道</strong>指的是一系列的聚合操作。
+                    </p>
+                    <p>
+                      管道又分3个部分<br><strong>管道源</strong>：在这个例子里，源是一个List<br><strong>中间操作</strong>：
+                      每个中间操作，又会返回一个Stream，比如.filter()又返回一个Stream,
+                      中间操作是“懒”操作，并不会真正进行遍历。<br><strong>结束操作</strong>：当这个操作执行后，流就被使用“光”了，无法再被操作。所以这必定是流的最后一个操作。
+                      结束操作不会返回Stream，但是会返回int、float、String、
+                      Collection或者像forEach，什么都不返回,
+                      结束操作才进行真正的遍历行为，在遍历的时候，才会去进行中间操作的相关判断</p>
+                    <p><strong>注：</strong>
+                      这个Stream和I/O章节的InputStream,OutputStream是不一样的概念。 </p>
+                    <h2 id="管道源"><a href="#管道源" class="headerlink"
+                                                                                                      title="管道源"></a>管道源
+                    </h2>
+                    <p>把Collection切换成管道源很简单，调用stream()就行了。</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">heros.stream()</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>但是数组却没有stream()方法，需要使用</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">Arrays.stream(hs)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>或者</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">Stream.of(hs)</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAggregate</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">​    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">​        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">​        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">​        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">​            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">​        &#125;</span><br><span class="line">​        <span class="comment">//管道源是集合</span></span><br><span class="line">​        heros</span><br><span class="line">​        .stream()</span><br><span class="line">​        .forEach(h-&gt;System.out.println(h.name));</span><br><span class="line">​         </span><br><span class="line">​        <span class="comment">//管道源是数组</span></span><br><span class="line">​        Hero hs[] = heros.toArray(<span class="keyword">new</span> Hero[heros.size()]);</span><br><span class="line">​        Arrays.stream(hs)</span><br><span class="line">​        .forEach(h-&gt;System.out.println(h.name));</span><br><span class="line">​         </span><br><span class="line">​    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="中间操作"><a href="#中间操作" class="headerlink"
+                                                                                                      title="中间操作"></a>中间操作
+                    </h2>
+                    <p>每个中间操作，又会返回一个Stream，比如.filter()又返回一个Stream,
+                      中间操作是“懒”操作，并不会真正进行遍历。<br>中间操作比较多，主要分两类<br>对元素进行筛选 和
+                      转换为其他形式的流<br><strong>对元素进行筛选：</strong><br>filter
+                      匹配<br>distinct
+                      去除重复(根据equals判断)<br>sorted 自然排序<br>sorted(Comparator<t>)
+                        指定排序<br>limit
+                        保留<br>skip
+                        忽略<br><strong>转换为其他形式的流</strong><br>mapToDouble
+                        转换为double的流<br>map 转换为任意类型的流</t>
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> charactor;</span><br><span class="line">      </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hero</span> <span class="keyword">implements</span> <span class="title">Comparable</span>&lt;<span class="title">Hero</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> String name;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">float</span> hp;</span><br><span class="line">         </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> damage;</span><br><span class="line">         </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Hero</span><span class="params">()</span></span>&#123;</span><br><span class="line">            </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getHp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> hp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHp</span><span class="params">(<span class="keyword">float</span> hp)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.hp = hp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getDamage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> damage;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDamage</span><span class="params">(<span class="keyword">int</span> damage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.damage = damage;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Hero</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name =name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//初始化name,hp,damage的构造方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Hero</span><span class="params">(String name,<span class="keyword">float</span> hp, <span class="keyword">int</span> damage)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name =name;</span><br><span class="line">        <span class="keyword">this</span>.hp = hp;</span><br><span class="line">        <span class="keyword">this</span>.damage = damage;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(Hero anotherHero)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(damage&lt;anotherHero.damage)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Hero [name="</span> + name + <span class="string">", hp="</span> + hp + <span class="string">", damage="</span> + damage + <span class="string">"]\r\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAggregate</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//制造一个重复数据</span></span><br><span class="line">        heros.add(heros.get(<span class="number">0</span>));</span><br><span class="line">        System.out.println(<span class="string">"初始化集合后的数据 (最后一个数据重复)："</span>);</span><br><span class="line">        System.out.println(heros);</span><br><span class="line">        System.out.println(<span class="string">"满足条件hp&gt;100&amp;&amp;damage&lt;50的数据"</span>);</span><br><span class="line">          </span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .filter(h-&gt;h.hp&gt;<span class="number">100</span>&amp;&amp;h.damage&lt;<span class="number">50</span>)</span><br><span class="line">            .forEach(h-&gt;System.out.print(h));</span><br><span class="line">          </span><br><span class="line">        System.out.println(<span class="string">"去除重复的数据，去除标准是看equals"</span>);</span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .distinct()</span><br><span class="line">            .forEach(h-&gt;System.out.print(h));</span><br><span class="line">        System.out.println(<span class="string">"按照血量排序"</span>);</span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .sorted((h1,h2)-&gt;h1.hp&gt;=h2.hp?<span class="number">1</span>:-<span class="number">1</span>)</span><br><span class="line">            .forEach(h-&gt;System.out.print(h));</span><br><span class="line">          </span><br><span class="line">        System.out.println(<span class="string">"保留3个"</span>);</span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .limit(<span class="number">3</span>)</span><br><span class="line">            .forEach(h-&gt;System.out.print(h));</span><br><span class="line">          </span><br><span class="line">        System.out.println(<span class="string">"忽略前3个"</span>);</span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .skip(<span class="number">3</span>)</span><br><span class="line">            .forEach(h-&gt;System.out.print(h));</span><br><span class="line">          </span><br><span class="line">        System.out.println(<span class="string">"转换为double的Stream"</span>);</span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .mapToDouble(Hero::getHp)</span><br><span class="line">            .forEach(h-&gt;System.out.println(h));</span><br><span class="line">          </span><br><span class="line">        System.out.println(<span class="string">"转换任意类型的Stream"</span>);</span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .map((h)-&gt; h.name + <span class="string">" - "</span> + h.hp + <span class="string">" - "</span> + h.damage)</span><br><span class="line">            .forEach(h-&gt;System.out.println(h));</span><br><span class="line">          </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="http://stepimagewm.how2j.cn/2568.png"
+                                                                                                      alt="ä¸­é´æä½">
+                    </p>
+                    <h2 id="结束操作"><a href="#结束操作" class="headerlink"
+                                                                                                      title="结束操作"></a>结束操作
+                    </h2>
+                    <p>当进行结束操作后，流就被使用“光”了，无法再被操作。所以这必定是流的最后一个操作。
+                      结束操作不会返回Stream，但是会返回int、float、String、
+                      Collection或者像forEach，什么都不返回,。<br>结束操作才真正进行遍历行为，前面的中间操作也在这个时候，才真正的执行。<br>常见结束操作如下：<br><strong>forEach()</strong>
+                      遍历每个元素<br><strong>toArray()</strong>
+                      转换为数组<br><strong>min(Comparator<t>)</t>
+                      </strong> 取最小的元素<br><strong>max(Comparator<t>)</t>
+                        </strong>
+                      取最大的元素<br><strong>count()</strong>
+                      总数<br><strong>findFirst()</strong> 第一个元素
+                    </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="keyword">package</span> lambda;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Random;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> org.omg.Messaging.SYNC_WITH_TRANSPORT;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> charactor.Hero;</span><br><span class="line">  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestAggregate</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Random r = <span class="keyword">new</span> Random();</span><br><span class="line">        List&lt;Hero&gt; heros = <span class="keyword">new</span> ArrayList&lt;Hero&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            heros.add(<span class="keyword">new</span> Hero(<span class="string">"hero "</span> + i, r.nextInt(<span class="number">1000</span>), r.nextInt(<span class="number">100</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"遍历集合中的每个数据"</span>);</span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .forEach(h-&gt;System.out.print(h));</span><br><span class="line">        System.out.println(<span class="string">"返回一个数组"</span>);</span><br><span class="line">        Object[] hs= heros</span><br><span class="line">            .stream()</span><br><span class="line">            .toArray();</span><br><span class="line">        System.out.println(Arrays.toString(hs));</span><br><span class="line">        System.out.println(<span class="string">"返回伤害最低的那个英雄"</span>);</span><br><span class="line">        Hero minDamageHero =</span><br><span class="line">        heros</span><br><span class="line">            .stream()</span><br><span class="line">            .min((h1,h2)-&gt;h1.damage-h2.damage)</span><br><span class="line">            .get();</span><br><span class="line">        System.out.print(minDamageHero);</span><br><span class="line">        System.out.println(<span class="string">"返回伤害最高的那个英雄"</span>);</span><br><span class="line"> </span><br><span class="line">        Hero mxnDamageHero =</span><br><span class="line">                heros</span><br><span class="line">                .stream()</span><br><span class="line">                .max((h1,h2)-&gt;h1.damage-h2.damage)</span><br><span class="line">                .get();</span><br><span class="line">        System.out.print(mxnDamageHero);     </span><br><span class="line">         </span><br><span class="line">        System.out.println(<span class="string">"流中数据的总数"</span>);</span><br><span class="line">        <span class="keyword">long</span> count = heros</span><br><span class="line">                .stream()</span><br><span class="line">                .count();</span><br><span class="line">        System.out.println(count);</span><br><span class="line"> </span><br><span class="line">        System.out.println(<span class="string">"第一个英雄"</span>);</span><br><span class="line">        Hero firstHero =</span><br><span class="line">                heros</span><br><span class="line">                .stream()</span><br><span class="line">                .findFirst()</span><br><span class="line">                .get();</span><br><span class="line">         </span><br><span class="line">        System.out.println(firstHero);</span><br><span class="line">         </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><img src="http://stepimagewm.how2j.cn/2569.png"
+                                                                                                      alt="ç»ææä½">
+                    </p>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/java/" rel="tag"># java</a>
+
+                      <a href="/tags/中级/" rel="tag"># 中级</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/05/19/java se_5 文件/" rel="next"
+                                                                                                        title="java se学习（五）I/O流">
+                          <i class="fa fa-chevron-left"></i> java se学习（五）I/O流
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/05/20/项目预览/" rel="prev"
+                                                                                                        title="java se项目-预览">
+                          java se项目-预览 <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="http://n.sinaimg.cn/translate/398/w599h599/20181121/RJCc-hnyuqhi6991299.jpg"
+                                                                                                  alt="Xiao Han">
+
+                  <p class="site-author-name" itemprop="name">Xiao Han</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                  </p>
+                </div>
+
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">14</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/index.html">
+                      <span class="site-state-item-count">2</span>
+                      <span class="site-state-item-name">分类</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">3</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiaohan1992" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiaohan1992a@163.com" target="_blank"
+                                                                                                    title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                </div>
+
+                <div
+                                                                                                class="links-of-blogroll motion-element links-of-blogroll-block">
+                  <div class="links-of-blogroll-title">
+                    <i class="fa  fa-fw fa-link"></i>
+                    Links
+                  </div>
+                  <ul class="links-of-blogroll-list">
+
+                    <li class="links-of-blogroll-item">
+                      <a href="https://ilovemenghan.top" title="XiaoHan"
+                                                                                                      target="_blank">XiaoHan</a>
+                    </li>
+
+                  </ul>
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#JAVA-LAMBDA-表达式教程"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">JAVA
+                          LAMBDA 表达式教程</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#普通方法"><span
+                                                                                                            class="nav-number">1.1.</span>
+                            <span class="nav-text">普通方法</span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#匿名类方式"><span
+                                                                                                            class="nav-number">1.2.</span>
+                            <span class="nav-text">匿名类方式</span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#Lambda方式"><span
+                                                                                                            class="nav-number">1.3.</span>
+                            <span class="nav-text">Lambda方式
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#从匿名类演变成Lambda表达式"><span
+                                                                                                            class="nav-number">1.4.</span>
+                            <span class="nav-text">从匿名类演变成Lambda表达式
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#匿名方法"><span
+                                                                                                            class="nav-number">1.5.</span>
+                            <span class="nav-text">匿名方法</span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#Lambda的弊端"><span
+                                                                                                            class="nav-number">1.6.</span>
+                            <span class="nav-text">Lambda的弊端
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#方法引用"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">方法引用</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#引用静态方法"><span
+                                                                                                            class="nav-number">2.1.</span>
+                            <span class="nav-text">引用静态方法
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#引用对象方法"><span
+                                                                                                            class="nav-number">2.2.</span>
+                            <span class="nav-text">引用对象方法
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#引用容器中的对象的方法"><span
+                                                                                                            class="nav-number">2.3.</span>
+                            <span class="nav-text">引用容器中的对象的方法
+                            </span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#引用构造器"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">引用构造器</span></a></li>
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#JAVA-集合的聚合操作"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">JAVA
+                          集合的聚合操作</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#Stream和管道的概念"><span
+                                                                                                            class="nav-number">4.1.</span>
+                            <span class="nav-text">Stream和管道的概念
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#管道源"><span
+                                                                                                            class="nav-number">4.2.</span>
+                            <span class="nav-text">管道源</span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#中间操作"><span
+                                                                                                            class="nav-number">4.3.</span>
+                            <span class="nav-text">中间操作</span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#结束操作"><span
+                                                                                                            class="nav-number">4.4.</span>
+                            <span class="nav-text">结束操作</span></a></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">Xiao Han</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.4</div>
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>

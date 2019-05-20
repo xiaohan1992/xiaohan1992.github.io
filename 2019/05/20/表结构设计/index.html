@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+                                                                                  content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#222">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet"
+                                                                                  type="text/css">
+
+  <link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+  <link rel="apple-touch-icon" sizes="180x180"
+                                                                                  href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="32x32"
+                                                                                  href="/images/favicon-32x32-next.png?v=5.1.4">
+
+  <link rel="icon" type="image/png" sizes="16x16"
+                                                                                  href="/images/favicon-16x16-next.png?v=5.1.4">
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+  <meta name="keywords" content="java,中级,">
+
+  <meta name="description"
+                                                                                  content="概述    在确定了要开发的功能之后，第一步应该做的是进行表结构的设计。只有把表结构设计正确了，才能支撑软件后续的功能开发，这一步是非常重要的。把设计过程分解成     数据库和表的创建      表关系      约束这么三个步骤进行，然后再把三个步骤放在一起做一遍     数据库与表 首先创建数据库  数据库名定为hutubill，在程序中的JDBC相关代码，都需要连接这个数据库名 hutub">
+  <meta name="keywords" content="java,中级">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="java se项目-表结构设计">
+  <meta property="og:url"
+                                                                                  content="http://yoursite.com/2019/05/20/表结构设计/index.html">
+  <meta property="og:site_name" content="XiaoHan‘s Blog">
+  <meta property="og:description"
+                                                                                  content="概述    在确定了要开发的功能之后，第一步应该做的是进行表结构的设计。只有把表结构设计正确了，才能支撑软件后续的功能开发，这一步是非常重要的。把设计过程分解成     数据库和表的创建      表关系      约束这么三个步骤进行，然后再把三个步骤放在一起做一遍     数据库与表 首先创建数据库  数据库名定为hutubill，在程序中的JDBC相关代码，都需要连接这个数据库名 hutub">
+  <meta property="og:locale" content="zh-Hans">
+  <meta property="og:image" content="http://stepimagewm.how2j.cn/2762.png">
+  <meta property="og:updated_time" content="2019-05-20T06:05:05.911Z">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="java se项目-表结构设计">
+  <meta name="twitter:description"
+                                                                                  content="概述    在确定了要开发的功能之后，第一步应该做的是进行表结构的设计。只有把表结构设计正确了，才能支撑软件后续的功能开发，这一步是非常重要的。把设计过程分解成     数据库和表的创建      表关系      约束这么三个步骤进行，然后再把三个步骤放在一起做一遍     数据库与表 首先创建数据库  数据库名定为hutubill，在程序中的JDBC相关代码，都需要连接这个数据库名 hutub">
+  <meta name="twitter:image" content="http://stepimagewm.how2j.cn/2762.png">
+
+  <script type="text/javascript" id="hexo.configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {
+      root: '/',
+      scheme: 'Pisces',
+      version: '5.1.4',
+      sidebar: {
+        "position": "left",
+        "display": "post",
+        "offset": 12,
+        "b2t": false,
+        "scrollpercent": false,
+        "onmobile": false
+      },
+      fancybox: true,
+      tabs: true,
+      motion: {
+        "enable": true,
+        "async": false,
+        "transition": {
+          "post_block": "fadeIn",
+          "post_header": "slideDownIn",
+          "post_body": "slideDownIn",
+          "coll_header": "slideLeftIn",
+          "sidebar": "slideUpIn"
+        }
+      },
+      duoshuo: {
+        userId: '0',
+        author: '博主'
+      },
+      algolia: {
+        applicationID: '',
+        apiKey: '',
+        indexName: '',
+        hits: {
+          "per_page": 10
+        },
+        labels: {
+          "input_placeholder": "Search for Posts",
+          "hits_empty": "We didn't find any results for the search: ${query}",
+          "hits_stats": "${hits} results found in ${time} ms"
+        }
+      }
+    };
+
+  </script>
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/20/表结构设计/">
+
+  <title>java se项目-表结构设计 | XiaoHan‘s Blog</title>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://xiaohan1992@github.com" class="github-corner"
+                                                                                    aria-label="View source on GitHub"><svg
+                                                                                      width="80"
+                                                                                      height="80"
+                                                                                      viewbox="0 0 250 250"
+                                                                                      style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+                                                                                      aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+                                                                                        fill="currentColor"
+                                                                                        style="transform-origin: 130px 106px;"
+                                                                                        class="octo-arm" />
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+                                                                                        fill="currentColor"
+                                                                                        class="octo-body" />
+        </svg></a>
+    <style>
+      .github-corner:hover .octo-arm {
+        animation: octocat-wave 560ms ease-in-out
+      }
+
+      @keyframes octocat-wave {
+
+        0%,
+        100% {
+          transform: rotate(0)
+        }
+
+        20%,
+        60% {
+          transform: rotate(-25deg)
+        }
+
+        40%,
+        80% {
+          transform: rotate(10deg)
+        }
+      }
+
+      @media (max-width:500px) {
+        .github-corner:hover .octo-arm {
+          animation: none
+        }
+
+        .github-corner .octo-arm {
+          animation: octocat-wave 560ms ease-in-out
+        }
+      }
+
+    </style>
+    <header id="header" class="header" itemscope
+                                                                                    itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+        <div class="site-brand-wrapper">
+          <div class="site-meta ">
+
+            <div class="custom-logo-site-title">
+              <a href="/" class="brand" rel="start">
+                <span class="logo-line-before"><i></i></span>
+                <span class="site-title">XiaoHan‘s Blog</span>
+                <span class="logo-line-after"><i></i></span>
+              </a>
+            </div>
+
+            <p class="site-subtitle">渣渣研究生的苦逼小站</p>
+
+          </div>
+
+          <div class="site-nav-toggle">
+            <button>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+              <span class="btn-bar"></span>
+            </button>
+          </div>
+        </div>
+
+        <nav class="site-nav">
+
+          <ul id="menu" class="menu">
+
+            <li class="menu-item menu-item-home">
+              <a href="/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+
+                首页
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-tags">
+              <a href="/tags/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+
+                标签
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-categories">
+              <a href="/categories/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+
+                分类
+              </a>
+            </li>
+
+            <li class="menu-item menu-item-archives">
+              <a href="/archives/" rel="section">
+
+                <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+
+                归档
+              </a>
+            </li>
+
+          </ul>
+
+        </nav>
+
+      </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+
+            <div id="posts" class="posts-expand">
+
+              <article class="post post-type-normal" itemscope
+                                                                                              itemtype="http://schema.org/Article">
+
+                <div class="post-block">
+                  <link itemprop="mainEntityOfPage"
+                                                                                                  href="http://yoursite.com/2019/05/20/表结构设计/">
+
+                  <span hidden itemprop="author" itemscope
+                                                                                                  itemtype="http://schema.org/Person">
+                    <meta itemprop="name" content="Xiao Han">
+                    <meta itemprop="description" content>
+                    <meta itemprop="image"
+                                                                                                    content="http://n.sinaimg.cn/translate/398/w599h599/20181121/RJCc-hnyuqhi6991299.jpg">
+                  </span>
+
+                  <span hidden itemprop="publisher" itemscope
+                                                                                                  itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="XiaoHan‘s Blog">
+                  </span>
+
+                  <header class="post-header">
+
+                    <h1 class="post-title" itemprop="name headline">java
+                      se项目-表结构设计</h1>
+
+                    <div class="post-meta">
+                      <span class="post-time">
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-calendar-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">发表于</span>
+
+                        <time title="创建于" itemprop="dateCreated datePublished"
+                                                                                                        datetime="2019-05-20T14:03:16+08:00">
+                          2019-05-20
+                        </time>
+
+                      </span>
+
+                      <span class="post-category">
+
+                        <span class="post-meta-divider">|</span>
+
+                        <span class="post-meta-item-icon">
+                          <i class="fa fa-folder-o"></i>
+                        </span>
+
+                        <span class="post-meta-item-text">分类于</span>
+
+                        <span itemprop="about" itemscope
+                                                                                                        itemtype="http://schema.org/Thing">
+                          <a href="/categories/项目/" itemprop="url" rel="index">
+                            <span itemprop="name">项目</span>
+                          </a>
+                        </span>
+
+                      </span>
+
+                    </div>
+                  </header>
+
+                  <div class="post-body" itemprop="articleBody">
+
+                    <h1 id="概述"><a href="#概述" class="headerlink"
+                                                                                                      title="概述"></a>概述
+                    </h1>
+                    <p>
+                      在确定了要开发的功能之后，第一步应该做的是进行表结构的设计。<br>只有把表结构设计正确了，才能支撑软件后续的功能开发，这一步是非常重要的。<br>把设计过程分解成
+                    </p>
+                    <ol>
+                      <li><a href="http://how2j.cn/k/hutubill/hutubill-database-table/714.html" target="_blank"
+                                                                                                        rel="noopener">数据库和表的创建</a>
+                      </li>
+                      <li><a href="http://how2j.cn/k/hutubill/hutubill-table-relationship/715.html" target="_blank"
+                                                                                                        rel="noopener">表关系</a>
+                      </li>
+                      <li><a href="http://how2j.cn/k/hutubill/hutubill-constraint/716.html" target="_blank"
+                                                                                                        rel="noopener">约束</a><br>这么三个步骤进行，然后再把三个步骤<a
+                                                                                                        href="http://how2j.cn/k/hutubill/hutubill-together/717.html"
+                                                                                                        target="_blank"
+                                                                                                        rel="noopener">放在一起</a>做一遍
+                      </li>
+                    </ol>
+                    <h1 id="数据库与表"><a href="#数据库与表" class="headerlink"
+                                                                                                      title="数据库与表"></a>数据库与表
+                    </h1>
+                    <h2 id="首先创建数据库"><a href="#首先创建数据库" class="headerlink"
+                                                                                                      title="首先创建数据库"></a>首先创建数据库
+                    </h2>
+                    <p>数据库名定为hutubill，在程序中的JDBC相关代码，都需要连接这个数据库名 hutubill</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">create database hutubill;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="确定需要哪些表"><a href="#确定需要哪些表" class="headerlink"
+                                                                                                      title="确定需要哪些表"></a>确定需要哪些表
+                    </h2>
+                    <p>根据业务上的需要，一共要3个表</p>
+                    <ol>
+                      <li>配置表信息 config<br>用于保存每月预算和Mysql的安装路径( 用于备份还原用)</li>
+                      <li>消费分类表 category<br>用于保存消费分类，比如餐饮，交通，住宿</li>
+                      <li>消费记录表 record<br>用于存放每一笔的消费记录，并且会用到消费分类</li>
+                    </ol>
+                    <h2 id="配置信息表-config"><a href="#配置信息表-config" class="headerlink"
+                                                                                                      title="配置信息表 config"></a>配置信息表
+                      config</h2>
+                    <p>配置信息表 config有如下字段<br>id 主键，每个表都有一个主键 类型是 int<br>key_
+                      配置信息按照键值对的形式出现
+                      ，类型是varchar(255)<br>value配置信息的值, 类型是 varchar(255)</p>
+                    <p>注: </p>
+                    <ol>
+                      <li>
+                        键值对<br>进一步解释一下键值对，比如要存放每个月的预算，则需要在config表中增加一条记录，key=”budget”
+                        value=”500”，就表示预算是500.</li>
+                      <li>varchar(255)
+                        表示变长字符，如果实际存放只有30个字符，那么在数据库中只占用30的空间，最多占用255</li>
+                      <li>key 是关键字，不适合用于作为字段名，所以在key后面加了一个下划线 key_
+                        就不会有任何问题了，识别性一样很好，一眼就知道这个字段是干什么用的
+                      </li>
+                      <li>ENGINE=InnoDB MySQL有多种存储引擎，MyISAM和InnoDB是其中常用的两种，
+                        他们之间的区别很多，如果要展开讲，就需要专门的章节了。 这里使用ENGINE=InnoDB
+                        是因为后续要使用的外键约束只有在InnoDB中才生效。
+                      </li>
+                      <li>DEFAULT CHARSET=utf8; 表示该表按照UTF-8的编码存放中文</li>
+                    </ol>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">CREATE TABLE config (</span><br><span class="line">  id int ,</span><br><span class="line">  key_ varchar(255) ,</span><br><span class="line">  value varchar(255)</span><br><span class="line">)  ENGINE=InnoDB  DEFAULT CHARSET=utf8;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="消费分类表-category"><a href="#消费分类表-category" class="headerlink"
+                                                                                                      title="消费分类表 category"></a>消费分类表
+                      category</h2>
+                    <p>消费分类表 category 有如下字段<br><strong>id</strong> 主键，每个表都有一个主键
+                      类型是
+                      int<br><strong>name</strong>分类的名称，类型是varchar(255)</p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="function">CREATE TABLE <span class="title">category</span> <span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">  id <span class="keyword">int</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">  name varchar(<span class="number">255</span>)</span></span></span><br><span class="line"><span class="function">)   ENGINE</span>=InnoDB DEFAULT CHARSET=utf8;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="消费记录表-record"><a href="#消费记录表-record" class="headerlink"
+                                                                                                      title="消费记录表 record"></a>消费记录表
+                      record</h2>
+                    <p>消费记录表 record 有如下字段：<br><strong>id</strong> 主键，每个表都有一个主键
+                      类型是
+                      int<br><strong>spend</strong>
+                      本次花费，类型是int<br><strong>cid</strong>
+                      对应的消费分类表的中记录的id, 类型是int<br><strong>comment</strong>
+                      备注，比如分类是娱乐，但是你希望记录更详细的内容，啪啪啪，那么就存放在这里。<br><strong>date</strong>
+                      日期，本次记录发生的时间。
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">CREATE TABLE record (</span><br><span class="line">  id int,</span><br><span class="line">  spend int,</span><br><span class="line">  cid int,</span><br><span class="line">  comment varchar(255) ,</span><br><span class="line">  date Date</span><br><span class="line">)   ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h1 id="表关系"><a href="#表关系" class="headerlink"
+                                                                                                      title="表关系"></a>表关系
+                    </h1>
+                    <h2 id="如何分析表之间的关系"><a href="#如何分析表之间的关系" class="headerlink"
+                                                                                                      title="如何分析表之间的关系"></a>如何分析表之间的关系
+                    </h2>
+                    <p>表和表之间的关系，常见的有一对多，多对一，多对多</p>
+                    <p>
+                      比如消费<strong>分类表</strong>和消费<strong>记录表</strong>之间是有关系的，那么如何分析他们之间的关系呢？
+                    </p>
+                    <p>
+                      分类表有<strong>多条</strong>数据，记录表也有<strong>多条</strong>数据，那么他们之间的关系是<strong>多对多吗？</strong>
+                    </p>
+                    <p>
+                      其实不然，正确的分析办法是这样的:<br><strong>一条记录数据，只能对应一种分类</strong><br>比如说这次消费是吃火锅，那么只能对应餐饮，不能同时又对应住宿。<br>那么就在分类这边写下符号
+                      <strong>一</strong></p>
+                    <p>
+                      <strong>一条分类数据，对应多条记录数据</strong><br>比如餐饮下，有多次消费记录，火锅，冒菜，盒饭<br>那么就在记录这边写下符号
+                      <strong>多</strong></p>
+                    <p>所以分类和记录之间的关系是 <strong>一对多</strong>，<br>又叫<strong>ONE TO
+                        MANY</strong>
+                      <strong>1：M</strong> </p>
+                    <p><img src="http://stepimagewm.how2j.cn/2762.png"
+                                                                                                      alt="å¦ä½åæè¡¨ä¹é´çå³ç³»">
+                    </p>
+                    <h2 id="确定外键"><a href="#确定外键" class="headerlink"
+                                                                                                      title="确定外键"></a>确定外键
+                    </h2>
+                    <p>确定好分类和记录之间的关系之后，就需要在数据库表结构中<strong>通过外键</strong>表现出来</p>
+                    <p>外键是加在多表中的，也就是加在Record表中的，在这里就是cid<br>record (<br>id
+                      int,<br>spend
+                      int,<br><strong>cid int,</strong><br>comment varchar(255)
+                      ,<br>date
+                      Date<br>)<br>cid指向了category表的主键 id </p>
+                    <h1 id="约束"><a href="#约束" class="headerlink"
+                                                                                                      title="约束"></a>约束
+                    </h1>
+                    <h2 id="主键"><a href="#主键" class="headerlink"
+                                                                                                      title="主键"></a>主键
+                    </h2>
+                    <p>所有的表都有一个主键id，但是这只是语意上的(我们认为的)，为了让数据库把id</p>
+                    <p>识别为主键</p>
+                    <p>，需要加上主键约束</p>
+                    <p>主键约束自带非空和唯一属性，即不能插入空，也不能重复</p>
+                    <p>分析这一条增加约束的SQL语句：</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">alter table category add constraint pk_category_id primary key (id);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <ul>
+                      <li>alter table category 表示修改表category</li>
+                      <li>add constraint增加约束</li>
+                      <li>pk_category_id 约束名称 pk 是primary key的缩写，category是表名,
+                        id表示约束加在id字段上。约束名称是可以自己定义的，你可以写成abc，但是尽量使用好的命名，使得一眼就能够看出来这个约束是什么意思。
+                        能够降低维护成本。</li>
+                      <li>primary key约束类型是主键约束</li>
+                      <li>(id)表示约束加在id字段上</li>
+                    </ul>
+                    <p>以下是对三张表都加上主键约束</p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">alter table category add constraint pk_category_id primary key (id);</span><br><span class="line">alter table record add constraint pk_record_id primary key (id);</span><br><span class="line">alter table config add constraint pk_config_id primary key (id);</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <h2 id="设置id为自增长"><a href="#设置id为自增长" class="headerlink"
+                                                                                                      title="设置id为自增长"></a>设置id为自增长
+                    </h2>
+                    <p>设置id为自增长是常用的插入数据策略。
+                      换句话说，插入消费分类数据的时候，只用提供分类名称即可，不需要自己提供id，
+                      id由数据库自己生成。<br>不同的数据库采用的自增长方式是不一样的，比如Oracle使用<a href="http://how2j.cn/k/oracle/oracle-sequence/227.html"
+                                                                                                      target="_blank"
+                                                                                                      rel="noopener">Sequence</a>来实现，而MySQL就使用AUTO_INCREMENT来实现
+                    </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">alter table category change id id int auto_increment;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p>分析这条SQL语句：<br><strong>alter table category</strong>
+                      表示修改表category<br><strong>change id</strong> 表示修改字段
+                      id<br><strong>id int
+                        auto_increment;</strong> 修改后的id是
+                      int类型，并且是auto_increment(修改之前仅仅是int类型，没有auto_increment)
+                    </p>
+                    <h2 id="外键"><a href="#外键" class="headerlink"
+                                                                                                      title="外键"></a>外键
+                    </h2>
+                    <p>外键约束的作用是保持数据的一致性<br>比如增加一条消费记录，金额是500，cid是5。<br>
+                      但是cid=5在分类表category中找不到对应的数据，那么这就破坏了数据的一致性，会带来一系列的后续问题，比如根据分类进行统计，就会找不到这条数据。
+                    </p>
+                    <p>增加外键约束之前首先确定record表的外键是cid，指向了category表的id主键。<br>
+                      所以增加外键之前，必须把category的id字段设置为主键。从而保证cid=5的数据在category中只能找到一条，而不是找到多条。
+                    </p>
+                    <p>以下是增加外键约束的SQL： </p>
+                    <figure class="highlight java">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line"><span class="function">alter table record add constraint fk_record_category foreign <span class="title">key</span> <span class="params">(cid)</span> references <span class="title">category</span><span class="params">(id)</span></span></span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+                    <p><strong>alter table record</strong>
+                      修改表record<br><strong>add
+                        constraint</strong>
+                      增加约束<br><strong>fk_record_category</strong>
+                      约束名称fk_record_category,fk是foreign
+                      key的缩写，record_category表示是从record表指向category表的约束。
+                      与主键一样，约束名称也是可以自己定义的，比如写成abc.
+                      不过依然建议使用可读性好的命名方式。<br><strong>foreign key</strong>
+                      约束类型，外键<br><strong>(cid)
+                        references category(id)</strong> 本表record的字段 cid
+                      指向category表的字段id</p>
+                    <h2 id="放在一起"><a href="#放在一起" class="headerlink"
+                                                                                                      title="放在一起"></a>放在一起
+                    </h2>
+                    <p> 在实际工作环境，就不一定会把增加约束和创建表格分开进行了，一般都是放在一起的。</p>
+                    <p>像这样 </p>
+                    <figure class="highlight plain">
+                      <table>
+                        <tr>
+                          <td class="gutter">
+                            <pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre>
+                          </td>
+                          <td class="code">
+                            <pre><span class="line">create database hutubill;</span><br><span class="line"> </span><br><span class="line">use  hutubill;</span><br><span class="line">  </span><br><span class="line">CREATE TABLE config (</span><br><span class="line">  id int AUTO_INCREMENT,</span><br><span class="line">  key_ varchar(255) ,</span><br><span class="line">  value varchar(255) ,</span><br><span class="line">  PRIMARY KEY (id)</span><br><span class="line">)  DEFAULT CHARSET=utf8;</span><br><span class="line">  </span><br><span class="line">CREATE TABLE category (</span><br><span class="line">  id int AUTO_INCREMENT,</span><br><span class="line">  name varchar(255) ,</span><br><span class="line">  PRIMARY KEY (id)</span><br><span class="line">)  DEFAULT CHARSET=utf8;</span><br><span class="line">  </span><br><span class="line">CREATE TABLE record (</span><br><span class="line">  id int AUTO_INCREMENT,</span><br><span class="line">  spend int,</span><br><span class="line">  cid int,</span><br><span class="line">  comment varchar(255) ,</span><br><span class="line">  date Date,</span><br><span class="line">  PRIMARY KEY (id),</span><br><span class="line">  CONSTRAINT `fk_record_category` FOREIGN KEY (`cid`) REFERENCES `category` (`id`)</span><br><span class="line">)  DEFAULT CHARSET=utf8;</span><br></pre>
+                          </td>
+                        </tr>
+                      </table>
+                    </figure>
+
+                  </div>
+
+                  <footer class="post-footer">
+
+                    <div class="post-tags">
+
+                      <a href="/tags/java/" rel="tag"># java</a>
+
+                      <a href="/tags/中级/" rel="tag"># 中级</a>
+
+                    </div>
+
+                    <div class="post-nav">
+                      <div class="post-nav-next post-nav-item">
+
+                        <a href="/2019/05/20/项目预览/" rel="next"
+                                                                                                        title="java se项目-预览">
+                          <i class="fa fa-chevron-left"></i> java se项目-预览
+                        </a>
+
+                      </div>
+
+                      <span class="post-nav-divider"></span>
+
+                      <div class="post-nav-prev post-nav-item">
+
+                        <a href="/2019/05/20/开发流程/" rel="prev"
+                                                                                                        title="java se项目-开发流程">
+                          java se项目-开发流程 <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                      </div>
+                    </div>
+
+                  </footer>
+                </div>
+
+              </article>
+
+              <div class="post-spread">
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="sidebar-toggle">
+          <div class="sidebar-toggle-line-wrap">
+            <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+            <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+          </div>
+        </div>
+
+        <aside id="sidebar" class="sidebar">
+
+          <div class="sidebar-inner">
+
+            <ul class="sidebar-nav motion-element">
+              <li class="sidebar-nav-toc sidebar-nav-active"
+                                                                                              data-target="post-toc-wrap">
+                文章目录
+              </li>
+              <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+                站点概览
+              </li>
+            </ul>
+
+            <section class="site-overview-wrap sidebar-panel">
+              <div class="site-overview">
+                <div class="site-author motion-element" itemprop="author" itemscope
+                                                                                                itemtype="http://schema.org/Person">
+
+                  <img class="site-author-image" itemprop="image" src="http://n.sinaimg.cn/translate/398/w599h599/20181121/RJCc-hnyuqhi6991299.jpg"
+                                                                                                  alt="Xiao Han">
+
+                  <p class="site-author-name" itemprop="name">Xiao Han</p>
+                  <p class="site-description motion-element"
+                                                                                                  itemprop="description">
+                  </p>
+                </div>
+
+                <nav class="site-state motion-element">
+
+                  <div class="site-state-item site-state-posts">
+
+                    <a href="/archives/">
+
+                      <span class="site-state-item-count">14</span>
+                      <span class="site-state-item-name">日志</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-categories">
+                    <a href="/categories/index.html">
+                      <span class="site-state-item-count">2</span>
+                      <span class="site-state-item-name">分类</span>
+                    </a>
+                  </div>
+
+                  <div class="site-state-item site-state-tags">
+                    <a href="/tags/index.html">
+                      <span class="site-state-item-count">3</span>
+                      <span class="site-state-item-name">标签</span>
+                    </a>
+                  </div>
+
+                </nav>
+
+                <div class="links-of-author motion-element">
+
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/xiaohan1992" target="_blank"
+                                                                                                    title="GitHub">
+
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+
+                  <span class="links-of-author-item">
+                    <a href="mailto:xiaohan1992a@163.com" target="_blank"
+                                                                                                    title="E-Mail">
+
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+
+                </div>
+
+                <div
+                                                                                                class="links-of-blogroll motion-element links-of-blogroll-block">
+                  <div class="links-of-blogroll-title">
+                    <i class="fa  fa-fw fa-link"></i>
+                    Links
+                  </div>
+                  <ul class="links-of-blogroll-list">
+
+                    <li class="links-of-blogroll-item">
+                      <a href="https://ilovemenghan.top" title="XiaoHan"
+                                                                                                      target="_blank">XiaoHan</a>
+                    </li>
+
+                  </ul>
+                </div>
+
+              </div>
+            </section>
+
+            <!--noindex-->
+            <section
+                                                                                            class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+              <div class="post-toc">
+
+                <div class="post-toc-content">
+                  <ol class="nav">
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#概述"><span
+                                                                                                        class="nav-number">1.</span>
+                        <span class="nav-text">概述</span></a></li>
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#数据库与表"><span
+                                                                                                        class="nav-number">2.</span>
+                        <span class="nav-text">数据库与表</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#首先创建数据库"><span
+                                                                                                            class="nav-number">2.1.</span>
+                            <span class="nav-text">首先创建数据库
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#确定需要哪些表"><span
+                                                                                                            class="nav-number">2.2.</span>
+                            <span class="nav-text">确定需要哪些表
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#配置信息表-config"><span
+                                                                                                            class="nav-number">2.3.</span>
+                            <span class="nav-text">配置信息表
+                              config</span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#消费分类表-category"><span
+                                                                                                            class="nav-number">2.4.</span>
+                            <span class="nav-text">消费分类表
+                              category</span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#消费记录表-record"><span
+                                                                                                            class="nav-number">2.5.</span>
+                            <span class="nav-text">消费记录表
+                              record</span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#表关系"><span
+                                                                                                        class="nav-number">3.</span>
+                        <span class="nav-text">表关系</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#如何分析表之间的关系"><span
+                                                                                                            class="nav-number">3.1.</span>
+                            <span class="nav-text">如何分析表之间的关系
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#确定外键"><span
+                                                                                                            class="nav-number">3.2.</span>
+                            <span class="nav-text">确定外键</span></a></li>
+                      </ol>
+                    </li>
+                    <li class="nav-item nav-level-1"><a class="nav-link"
+                                                                                                      href="#约束"><span
+                                                                                                        class="nav-number">4.</span>
+                        <span class="nav-text">约束</span></a>
+                      <ol class="nav-child">
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#主键"><span
+                                                                                                            class="nav-number">4.1.</span>
+                            <span class="nav-text">主键</span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#设置id为自增长"><span
+                                                                                                            class="nav-number">4.2.</span>
+                            <span class="nav-text">设置id为自增长
+                            </span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#外键"><span
+                                                                                                            class="nav-number">4.3.</span>
+                            <span class="nav-text">外键</span></a></li>
+                        <li class="nav-item nav-level-2"><a class="nav-link"
+                                                                                                          href="#放在一起"><span
+                                                                                                            class="nav-number">4.4.</span>
+                            <span class="nav-text">放在一起</span></a></li>
+                      </ol>
+                    </li>
+                  </ol>
+                </div>
+
+              </div>
+            </section>
+            <!--/noindex-->
+
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+          <span class="with-love">
+            <i class="fa fa-user"></i>
+          </span>
+          <span class="author" itemprop="copyrightHolder">Xiao Han</span>
+
+        </div>
+
+        <div class="powered-by">由 <a class="theme-link" target="_blank"
+                                                                                          href="https://hexo.io">Hexo</a>
+          强力驱动</div>
+
+        <span class="post-meta-divider">|</span>
+
+        <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank"
+                                                                                          href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a>
+          v5.1.4</div>
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    if (Object.prototype.toString.call(window.Promise) !==
+      '[object Function]') {
+      window.Promise = null;
+    }
+
+  </script>
+
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1">
+  </script>
+
+  <script type="text/javascript"
+                                                                                  src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5">
+  </script>
+
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js">
+  </script>
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4">
+  </script>
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+
+</html>
